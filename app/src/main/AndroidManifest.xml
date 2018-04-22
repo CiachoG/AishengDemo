@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ciacho.aishengdemo">
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="personal_moudel.app.AboutActivity"/>
+        <activity android:name="personal_moudel.app.FunctionActivity"/>
+        <activity android:name="login_moudel.LoginActivity"></activity>
+        <activity android:name="login_moudel.RegisterActivity"/>
     </application>
 
 </manifest>

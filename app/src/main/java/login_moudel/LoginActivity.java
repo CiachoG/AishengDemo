@@ -1,16 +1,24 @@
-package cn.fanrunqi.materiallogin;
+package login_moudel;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.ciacho.aishengdemo.R;
+import com.example.ciacho.aishengdemo.app.MainActivity;
+
+import HttpConnect.LoginConnect;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,6 +32,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Toolbar toolbar=(Toolbar)findViewById(R.id.login_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar=getSupportActionBar();
         initView();
         setListener();
     }
@@ -40,14 +51,15 @@ public class LoginActivity extends AppCompatActivity {
         btGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Explode explode = new Explode();
-                explode.setDuration(500);
-
-                getWindow().setExitTransition(explode);
-                getWindow().setEnterTransition(explode);
-                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
-                Intent i2 = new Intent(LoginActivity.this,LoginSuccessActivity.class);
-                startActivity(i2, oc2.toBundle());
+//                Explode explode = new Explode();
+//                explode.setDuration(500);
+//
+//                getWindow().setExitTransition(explode);
+//                getWindow().setEnterTransition(explode);
+//                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
+                LoginConnect loginConnect=new LoginConnect();
+                loginConnect.SendByHttpClient("123456","123456");
+                Toast.makeText(LoginActivity.this,loginConnect.getLoginFlag(),Toast.LENGTH_SHORT).show();
             }
         });
         fab.setOnClickListener(new View.OnClickListener() {

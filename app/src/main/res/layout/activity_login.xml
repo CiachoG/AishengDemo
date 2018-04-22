@@ -5,8 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context="cn.fanrunqi.materiallogin.LoginActivity">
-
+    tools:context="login_moudel.LoginActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/login_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        />
     <android.support.v7.widget.CardView
         android:layout_width="300dp"
         android:layout_height="300dp"
@@ -29,17 +34,17 @@
                 android:layout_width="8dp"
                 android:layout_height="match_parent"
                 android:background="#2fa881"
-                />
+                android:layout_alignParentLeft="true" />
             <TextView
                 android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:text="@string/login"
+                android:text="login"
                 android:textColor="#FFCC00"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                />
+                android:layout_marginLeft="50dp" />
         </RelativeLayout>
         <LinearLayout
             android:layout_marginTop="10dp"
@@ -47,14 +52,16 @@
             android:paddingEnd="30dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="50dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="30dp">
             <android.support.design.widget.TextInputLayout
                 android:textColorHint="#c5c5c5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
                     android:textSize="13sp"
-                    android:hint="@string/Username"
+                    android:hint="Username"
                     android:textColor="#2fa881"
                     android:id="@+id/et_username"
                     android:layout_width="match_parent"
@@ -71,14 +78,16 @@
                 android:paddingEnd="30dp"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp">
+                android:layout_height="50dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="30dp">
                 <android.support.design.widget.TextInputLayout
                     android:textColorHint="#c5c5c5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <EditText
                         android:textSize="13sp"
-                        android:hint="@string/Password"
+                        android:hint="Password"
                         android:textColor="#2fa881"
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
@@ -101,7 +110,7 @@
                     android:stateListAnimator="@drawable/state_list_animator_z"
                     android:layout_width="150dp"
                     android:layout_height="50dp"
-                    android:text="@string/go"
+                    android:text="登录"
                     android:textColor="#d3d3d3"
                     >
                 </Button>
@@ -113,7 +122,9 @@
                 android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/forgot_your_password"
+                android:text="忘记密码"
+                android:textColorLink="#0000ff"
+                android:shadowColor="#0000ff"
                 />
         </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -129,6 +140,7 @@
         android:layout_marginTop="25dp"
         android:layout_alignEnd="@id/cv"
         android:layout_marginEnd="-20dp"
-        />
+        android:layout_alignRight="@id/cv"
+        android:layout_marginRight="-20dp" />
 
 </RelativeLayout>

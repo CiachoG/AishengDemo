@@ -4,8 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cn.fanrunqi.materiallogin.LoginActivity">
-
+    android:background="@drawable/bg"
+    tools:context="login_moudel.LoginActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/register_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        />
     <FrameLayout
         android:layout_centerInParent="true"
         android:paddingTop="70dp"
@@ -32,17 +38,19 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_marginStart="50dp"
-                   android:text="@string/register"
+                   android:text="register"
                    android:textColor="#fff"
                    android:textSize="16sp"
                    android:textStyle="bold"
-                   />
+                   android:layout_marginLeft="50dp" />
                <LinearLayout
                    android:layout_marginTop="10dp"
                    android:paddingStart="50dp"
                    android:paddingEnd="30dp"
                    android:layout_width="match_parent"
-                   android:layout_height="40dp">
+                   android:layout_height="40dp"
+                   android:paddingLeft="50dp"
+                   android:paddingRight="30dp">
                    <android.support.design.widget.TextInputLayout
                        android:textColorHint="#f0f7f4"
                        android:layout_width="match_parent"
@@ -50,7 +58,7 @@
                        android:layout_height="wrap_content">
                        <EditText
                            android:textSize="13sp"
-                           android:hint="@string/Username"
+                           android:hint="Username"
                            android:textColor="#f0f7f4"
                            android:id="@+id/et_username"
                            android:layout_width="match_parent"
@@ -67,7 +75,9 @@
                    android:paddingEnd="30dp"
                    android:orientation="horizontal"
                    android:layout_width="match_parent"
-                   android:layout_height="40dp">
+                   android:layout_height="40dp"
+                   android:paddingLeft="50dp"
+                   android:paddingRight="30dp">
                    <android.support.design.widget.TextInputLayout
 
                        android:textColorHint="#f0f7f4"
@@ -76,7 +86,7 @@
                        android:layout_height="wrap_content">
                        <EditText
                            android:textSize="13sp"
-                           android:hint="@string/Password"
+                           android:hint="Password"
                            android:textColor="#f0f7f4"
                            android:id="@+id/et_password"
                            android:layout_width="match_parent"
@@ -93,7 +103,9 @@
                    android:paddingEnd="30dp"
                    android:orientation="horizontal"
                    android:layout_width="match_parent"
-                   android:layout_height="40dp">
+                   android:layout_height="40dp"
+                   android:paddingLeft="50dp"
+                   android:paddingRight="30dp">
                    <android.support.design.widget.TextInputLayout
 
                        android:textColorHint="#f0f7f4"
@@ -103,7 +115,7 @@
                        <EditText
                            android:textSize="13sp"
                            android:textColor="#f0f7f4"
-                           android:hint="@string/repeat_password"
+                           android:hint="repeatpassword"
                            android:id="@+id/et_repeatpassword"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
@@ -122,7 +134,7 @@
                    android:stateListAnimator="@drawable/state_list_animator_z"
                    android:layout_width="150dp"
                    android:layout_height="50dp"
-                   android:text="@string/next"
+                   android:text="next"
                    android:textColor="#2fa881"
                    >
                </Button>

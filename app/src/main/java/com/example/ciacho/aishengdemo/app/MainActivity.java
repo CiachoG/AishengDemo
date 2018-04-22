@@ -16,6 +16,7 @@ import com.example.ciacho.aishengdemo.adapter.MyPagerAdapter;
 import com.example.ciacho.aishengdemo.entity.TabEntity;
 import forum_moudel.Fragement.ForumFragment;
 import message_moudel.Fragment.MessageFragment;
+import personal_moudel.PersonalFragment;
 import shop_moudel.Fragment.ShopFragment;
 import com.example.ciacho.aishengdemo.utils.ViewFindUtils;
 import com.flyco.tablayout.CommonTabLayout;
@@ -27,11 +28,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private Context mContext = this;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
-    private String[] mTitles = {"论坛", "商城", "消息",};
+    private String[] mTitles = {"论坛", "商城", "消息","我的"};
     private int[] mIconUnselectIds = {
-            R.drawable.ic_forum_normal,R.drawable.ic_shop_normal,R.drawable.ic_message_normal};
+            R.drawable.ic_forum_normal,R.drawable.ic_shop_normal,R.drawable.ic_message_normal,R.drawable.ic_personal_normal};
     private int[] mIconSelectIds = {
-            R.drawable.ic_forum_press,R.drawable.ic_shop_press,R.drawable.ic_message_press};
+            R.drawable.ic_forum_press,R.drawable.ic_shop_press,R.drawable.ic_message_press,R.drawable.ic_personal_press};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private View mDecorView;
     private ViewPager mViewPager;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         mFragments.add(ForumFragment.getInstance());
         mFragments.add(ShopFragment.getInstance());
         mFragments.add(MessageFragment.getInstance());
+        mFragments.add(PersonalFragment.getInstance());
     }
 
     @Override

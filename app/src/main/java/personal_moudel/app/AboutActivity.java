@@ -1,4 +1,4 @@
-package aisheng.app;
+package personal_moudel.app;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.allen.library.SuperTextView;
+import com.example.ciacho.aishengdemo.R;
 
-import cn.hugeterry.coordinatortablayoutdemo.R;
 
 /**
  * Created by Ciacho on 2018/4/15.
