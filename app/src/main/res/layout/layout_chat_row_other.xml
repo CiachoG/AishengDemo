@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingTop="15dp"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@+id/img_headport"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_headport_other" />
+
+    <LinearLayout
+        android:id="@+id/linear_chatContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:gravity="start"
+        android:orientation="horizontal">
+
+        <com.cpiz.android.bubbleview.BubbleTextView
+            android:id="@+id/text_chatContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="2222222222222222444"
+            android:textColor="@android:color/black"
+            app:bb_arrowTo="@+id/img_headport"
+            app:bb_cornerRadius="4dp"
+            app:bb_borderColor="@android:color/black"
+            app:bb_fillColor="#fff" /> <!--app:自定义属性在运行中更新，不实时更新到design上-->
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="75dp"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
