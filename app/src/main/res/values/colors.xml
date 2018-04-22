@@ -3,4 +3,9 @@
     <color name="colorPrimary">#33b5e6</color>
     <color name="colorPrimaryDark">#33b5e6</color>
     <color name="colorAccent">#1297ff</color>
+
+    <color name="TransparentColor">#00000000</color>
+    <color name="MainThemeColor">#1296db</color>
+    <color name="click_normal">#fff</color>
+    <color name="click_press">#ddd</color>
 </resources>

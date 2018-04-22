@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ciacho.aishengdemo">
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,8 +30,13 @@
         </activity>
         <activity android:name="personal_moudel.app.AboutActivity"/>
         <activity android:name="personal_moudel.app.FunctionActivity"/>
-        <activity android:name="login_moudel.LoginActivity"></activity>
+        <activity android:name="login_moudel.LoginActivity"/>
         <activity android:name="login_moudel.RegisterActivity"/>
+        <activity android:name="modular_chat.chat_main.ChatActivity"/>
+        <activity android:name="modular_chat.chat_setup.chat_speech_setup.SpeechSetupActivity" />
+        <activity android:name="modular_chat.chat_setup.chat_speech_setup.chat_sounder_setup.SpeechSounderActivity" />
+        <activity android:name="modular_chat.chat_setup.chat_quick_response_setup.QuickResponseActivity" />
+        <activity android:name="modular_chat.chat_setup.chat_syllable_setup.SyllableLibraryActivity" />
     </application>
 
 </manifest>
