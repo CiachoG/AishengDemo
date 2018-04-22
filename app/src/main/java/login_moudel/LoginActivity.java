@@ -51,12 +51,6 @@ public class LoginActivity extends AppCompatActivity {
         btGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Explode explode = new Explode();
-//                explode.setDuration(500);
-//
-//                getWindow().setExitTransition(explode);
-//                getWindow().setEnterTransition(explode);
-//                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
                 LoginConnect loginConnect=new LoginConnect();
                 loginConnect.SendByHttpClient("123456","123456");
                 Toast.makeText(LoginActivity.this,loginConnect.getLoginFlag(),Toast.LENGTH_SHORT).show();
