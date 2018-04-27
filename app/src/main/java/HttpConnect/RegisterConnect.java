@@ -10,23 +10,23 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
 /**
- * Created by Ciacho on 2018/4/22.
+ * Created by Ciacho on 2018/4/26.
  */
 
-public class LoginConnect {
-    private String loginFlag=null;
+public class RegisterConnect {
+    private String responseString=null;
     private Handler handler;
-    public LoginConnect(Handler handler){
+    public RegisterConnect(Handler handler){
         this.handler=handler;
     }
-    public String getLoginFlag() {
-        return loginFlag;
+
+    public String getResponseString() {
+        return responseString;
     }
 
-    public void setLoginFlag(String loginFlag) {
-        this.loginFlag = loginFlag;
+    public void setResponseString(String responseString) {
+        this.responseString = responseString;
     }
 
     public void SendByHttpClient(final String id, final String pw){
@@ -36,7 +36,7 @@ public class LoginConnect {
                 HttpURLConnection connection=null;
                 BufferedReader reader=null;
                 try {
-                    URL url=new URL("http://47.100.170.83:8080/aisheng/Login");
+                    URL url=new URL("http://47.100.170.83:8080/aisheng/Regist");
                     connection= (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("POST");
                     DataOutputStream outputStream=new DataOutputStream(connection.getOutputStream());
@@ -50,7 +50,7 @@ public class LoginConnect {
                     while ((line=reader.readLine())!=null){
                         response.append(line);
                     }
-                    setLoginFlag(response.toString());
+                    setResponseString(response.toString());
                     System.out.println(response);
                     Message message=handler.obtainMessage();
                     message.what=1;
@@ -65,6 +65,4 @@ public class LoginConnect {
             }
         }).start();
     }
-
-
 }

@@ -3,7 +3,10 @@ package login_moudel;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -13,23 +16,64 @@ import android.transition.TransitionInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.ciacho.aishengdemo.R;
+
+import HttpConnect.RegisterConnect;
 
 public class RegisterActivity extends AppCompatActivity {
 
     private FloatingActionButton fab;
     private CardView cvAdd;
-
+    private EditText userNameEdit,passWordEdit,rPasswordEdit;
+    private Button submitBt;
+    private Handler handler;
+    private RegisterConnect registerConnect;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         Toolbar toolbar=(Toolbar)findViewById(R.id.register_toolbar);
+        userNameEdit=findViewById(R.id.et_username);
+        passWordEdit=findViewById(R.id.et_password);
+        rPasswordEdit=findViewById(R.id.et_repeatpassword);
+        submitBt=findViewById(R.id.bt_go);
         setSupportActionBar(toolbar);
         ActionBar actionBar=getSupportActionBar();
         ShowEnterAnimation();
         initView();
+        handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message message) {
+                Toast.makeText(RegisterActivity.this,registerConnect.getResponseString(),Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+        submitBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String userName=userNameEdit.getText().toString();
+                String passWord=passWordEdit.getText().toString();
+                String rPassWord=rPasswordEdit.getText().toString();
+                if(!passWord.equals(rPassWord)){
+                    Snackbar.make(view,"两次密码不一致",Snackbar.LENGTH_SHORT)
+                            .setAction("清空", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    passWordEdit.setText("");
+                                    rPasswordEdit.setText("");
+                                }
+                            }).show();
+                }
+                else {
+                    registerConnect=new RegisterConnect(handler);
+                    registerConnect.SendByHttpClient(userName,passWord);
+                }
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

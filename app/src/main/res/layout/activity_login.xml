@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
     tools:context="login_moudel.LoginActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/login_toolbar"
@@ -40,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:text="login"
+                android:text="登录"
                 android:textColor="#FFCC00"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -61,7 +60,7 @@
                 android:layout_height="wrap_content">
                 <EditText
                     android:textSize="13sp"
-                    android:hint="Username"
+                    android:hint="用户名"
                     android:textColor="#2fa881"
                     android:id="@+id/et_username"
                     android:layout_width="match_parent"
@@ -87,7 +86,7 @@
                     android:layout_height="wrap_content">
                     <EditText
                         android:textSize="13sp"
-                        android:hint="Password"
+                        android:hint="密码"
                         android:textColor="#2fa881"
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
@@ -111,14 +110,13 @@
                     android:layout_width="150dp"
                     android:layout_height="50dp"
                     android:text="登录"
-                    android:textColor="#d3d3d3"
                     >
                 </Button>
             </RelativeLayout>
             <TextView
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center_horizontal"
-                android:textColor="#9a9a9a"
+                android:textColor="#0000ff"
                 android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
