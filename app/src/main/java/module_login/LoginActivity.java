@@ -1,22 +1,22 @@
-package login_moudel;
+package module_login;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.transition.Explode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.ciacho.aishengdemo.Quantity;
 import com.example.ciacho.aishengdemo.R;
 import com.example.ciacho.aishengdemo.app.MainActivity;
 
@@ -45,6 +45,10 @@ public class LoginActivity extends AppCompatActivity {
             public boolean handleMessage(Message message) {
                 if(!loginConnect.getLoginFlag().equals("false"))
                 {
+                    Quantity.LOGIN_FLAG=1;
+                    SharedPreferences.Editor editor = getSharedPreferences("userInfo",MODE_PRIVATE).edit();
+                    editor.putString("current_userInfo",loginConnect.getLoginFlag());
+                    editor.apply();
                     Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                 }
@@ -97,5 +101,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         fab.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

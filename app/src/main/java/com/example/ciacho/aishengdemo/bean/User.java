@@ -5,7 +5,16 @@ public class User {
 	private String username;
 	private int sex;
 	private int age;
-	
+	private String image;
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public User(String userid, String username, int sex, int age) {
 		super();
 		this.userid = userid;

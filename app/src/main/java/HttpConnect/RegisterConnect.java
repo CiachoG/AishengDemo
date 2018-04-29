@@ -3,6 +3,8 @@ package HttpConnect;
 import android.os.Handler;
 import android.os.Message;
 
+import com.example.ciacho.aishengdemo.Quantity;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
@@ -36,7 +38,7 @@ public class RegisterConnect {
                 HttpURLConnection connection=null;
                 BufferedReader reader=null;
                 try {
-                    URL url=new URL("http://192.168.2.101:8080/aisheng/Regist");
+                    URL url=new URL(Quantity.SERVER_URL+"Regist");
                     connection= (HttpURLConnection) url.openConnection();
                     connection.setRequestProperty("Accept-Charset", "UTF-8");
                     connection.setRequestProperty("contentType", "UTF-8");

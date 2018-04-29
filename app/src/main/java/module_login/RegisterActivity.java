@@ -1,4 +1,4 @@
-package login_moudel;
+package module_login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

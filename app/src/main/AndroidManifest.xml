@@ -18,8 +18,9 @@
         </activity>
         <activity android:name="module_personal.app.AboutActivity"/>
         <activity android:name="module_personal.app.FunctionActivity"/>
-        <activity android:name="login_moudel.LoginActivity"></activity>
-        <activity android:name="login_moudel.RegisterActivity"/>
+        <activity android:name="module_login.LoginActivity"></activity>
+        <activity android:name="module_login.RegisterActivity"/>
+        <activity android:name="test.TestActivity"/>
     </application>
 
 </manifest>
