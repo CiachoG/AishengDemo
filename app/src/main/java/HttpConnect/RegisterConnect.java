@@ -36,10 +36,13 @@ public class RegisterConnect {
                 HttpURLConnection connection=null;
                 BufferedReader reader=null;
                 try {
-                    URL url=new URL("http://47.100.170.83:8080/aisheng/Regist");
+                    URL url=new URL("http://192.168.2.101:8080/aisheng/Regist");
                     connection= (HttpURLConnection) url.openConnection();
+                    connection.setRequestProperty("Accept-Charset", "UTF-8");
+                    connection.setRequestProperty("contentType", "UTF-8");
                     connection.setRequestMethod("POST");
                     DataOutputStream outputStream=new DataOutputStream(connection.getOutputStream());
+                    //outputStream.writeUTF("ID="+id+"&PW="+pw);
                     outputStream.writeBytes("ID="+id+"&PW="+pw);
                     connection.setConnectTimeout(8000);
                     connection.setReadTimeout(8000);

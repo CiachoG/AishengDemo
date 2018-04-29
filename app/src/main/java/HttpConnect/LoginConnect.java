@@ -36,7 +36,7 @@ public class LoginConnect {
                 HttpURLConnection connection=null;
                 BufferedReader reader=null;
                 try {
-                    URL url=new URL("http://47.100.170.83:8080/aisheng/Login");
+                    URL url=new URL("http://192.168.2.101:8080/aisheng/Login");
                     connection= (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("POST");
                     DataOutputStream outputStream=new DataOutputStream(connection.getOutputStream());

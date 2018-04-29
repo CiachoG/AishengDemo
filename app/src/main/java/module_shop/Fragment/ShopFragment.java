@@ -1,4 +1,4 @@
-package shop_moudel.Fragment;
+package module_shop.Fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

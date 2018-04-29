@@ -43,8 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         handler=new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message message) {
-
-                if(loginConnect.getLoginFlag().equals("true"))
+                if(!loginConnect.getLoginFlag().equals("false"))
                 {
                     Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);

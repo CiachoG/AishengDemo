@@ -1,4 +1,4 @@
-package personal_moudel;
+package module_personal;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import com.allen.library.SuperTextView;
 import com.example.ciacho.aishengdemo.R;
 
 import login_moudel.LoginActivity;
-import personal_moudel.app.AboutActivity;
+import module_personal.app.AboutActivity;
 
 @SuppressLint("ValidFragment")
 public class PersonalFragment extends Fragment {

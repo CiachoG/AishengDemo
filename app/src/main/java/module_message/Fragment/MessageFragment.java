@@ -1,4 +1,4 @@
-package message_moudel.Fragment;
+package module_message.Fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

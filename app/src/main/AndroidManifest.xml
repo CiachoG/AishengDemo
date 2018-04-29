@@ -16,8 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="personal_moudel.app.AboutActivity"/>
-        <activity android:name="personal_moudel.app.FunctionActivity"/>
+        <activity android:name="module_personal.app.AboutActivity"/>
+        <activity android:name="module_personal.app.FunctionActivity"/>
         <activity android:name="login_moudel.LoginActivity"></activity>
         <activity android:name="login_moudel.RegisterActivity"/>
     </application>
