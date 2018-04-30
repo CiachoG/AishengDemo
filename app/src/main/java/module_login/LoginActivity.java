@@ -1,20 +1,22 @@
-package login_moudel;
+package module_login;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.transition.Explode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.ciacho.aishengdemo.Quantity;
 import com.example.ciacho.aishengdemo.R;
 import com.example.ciacho.aishengdemo.app.MainActivity;
 
@@ -26,8 +28,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etPassword;
     private Button btGo;
     private CardView cv;
+    private LoginConnect loginConnect;
     private FloatingActionButton fab;
-
+    private Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,26 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar toolbar=(Toolbar)findViewById(R.id.login_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar=getSupportActionBar();
+        etUsername=findViewById(R.id.et_username);
+        etPassword=findViewById(R.id.et_password);
+        handler=new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message message) {
+                if(!loginConnect.getLoginFlag().equals("false"))
+                {
+                    Quantity.LOGIN_FLAG=1;
+                    SharedPreferences.Editor editor = getSharedPreferences("userInfo",MODE_PRIVATE).edit();
+                    editor.putString("current_userInfo",loginConnect.getLoginFlag());
+                    editor.apply();
+                    Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(LoginActivity.this,"账号或密码错误",Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
         initView();
         setListener();
     }
@@ -51,15 +74,10 @@ public class LoginActivity extends AppCompatActivity {
         btGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Explode explode = new Explode();
-//                explode.setDuration(500);
-//
-//                getWindow().setExitTransition(explode);
-//                getWindow().setEnterTransition(explode);
-//                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this);
-                LoginConnect loginConnect=new LoginConnect();
-                loginConnect.SendByHttpClient("123456","123456");
-                Toast.makeText(LoginActivity.this,loginConnect.getLoginFlag(),Toast.LENGTH_SHORT).show();
+                loginConnect=new LoginConnect(handler);
+
+                loginConnect.SendByHttpClient(etUsername.getText().toString(),etPassword.getText().toString());
+
             }
         });
         fab.setOnClickListener(new View.OnClickListener() {
@@ -83,5 +101,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         fab.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
