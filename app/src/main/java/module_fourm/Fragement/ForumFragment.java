@@ -1,4 +1,4 @@
-package forum_moudel.Fragement;
+package module_fourm.Fragement;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -24,7 +24,7 @@ public class ForumFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.forum_fragment_layout, null);
+        View v = inflater.inflate(R.layout.fragment_forum_layout, null);
 
         return v;
     }

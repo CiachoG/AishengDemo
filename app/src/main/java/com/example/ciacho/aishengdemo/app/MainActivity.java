@@ -14,7 +14,7 @@ import android.view.View;
 import com.example.ciacho.aishengdemo.R;
 import com.example.ciacho.aishengdemo.adapter.MyPagerAdapter;
 import com.example.ciacho.aishengdemo.entity.TabEntity;
-import forum_moudel.Fragement.ForumFragment;
+import module_fourm.Fragement.ForumFragment;
 import module_message.Fragment.MessageFragment;
 import module_personal.PersonalFragment;
 import module_shop.Fragment.ShopFragment;

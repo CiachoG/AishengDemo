@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.allen.library.SuperTextView;
 import com.bumptech.glide.Glide;
@@ -27,7 +26,6 @@ import com.mylhyl.circledialog.params.DialogParams;
 
 import module_login.LoginActivity;
 import module_personal.app.AboutActivity;
-import test.TestActivity;
 
 @SuppressLint("ValidFragment")
 public class PersonalFragment extends Fragment {
@@ -47,7 +45,7 @@ public class PersonalFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.personal_fragment_layout, null);
+        View v = inflater.inflate(R.layout.fragment_personal_layout, null);
         sText_about=v.findViewById(R.id.about_aisheng);
         sText_Tx=v.findViewById(R.id.per_srcname);
         /*Glide.with(this)
@@ -93,7 +91,7 @@ public class PersonalFragment extends Fragment {
     }
     public void showDialog()
     {
-        final String[] items = {"退出登录"};
+        final String[] items = {"修改个人信息","退出登录"};
         new CircleDialog.Builder()
                 .configDialog(new ConfigDialog() {
                     @Override
@@ -107,14 +105,21 @@ public class PersonalFragment extends Fragment {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int
                             position, long id) {
+                        switch(position)
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                Quantity.LOGIN_FLAG=0;
+                                SharedPreferences.Editor editor = preferences.edit();
+                                editor.clear();
+                                editor.apply();
+                                getActivity().finish();
+                                Intent intent=new Intent(getActivity(), LoginActivity.class);
+                                startActivity(intent);
+                                break;
+                        }
 
-                        Quantity.LOGIN_FLAG=0;
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.clear();
-                        editor.apply();
-                        getActivity().finish();
-                        Intent intent=new Intent(getActivity(), LoginActivity.class);
-                        startActivity(intent);
                     }
                 })
                 .setNegative("取消", null)
