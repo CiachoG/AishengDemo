@@ -31,17 +31,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="personal_moudel.app.AboutActivity" />
-        <activity android:name="personal_moudel.app.FunctionActivity" />
-        <activity android:name="login_moudel.LoginActivity" />
-        <activity android:name="login_moudel.RegisterActivity" />
+        <activity android:name="module_personal.app.AboutActivity" />
+        <activity android:name="module_personal.app.FunctionActivity" />
+        <activity android:name="module_login.LoginActivity" />
+        <activity android:name="module_login.RegisterActivity" />
         <activity android:name="modular_chat.chat_main.ChatActivity" />
         <activity android:name="modular_chat.chat_setup.chat_speech_setup.SpeechSetupActivity" />
         <activity android:name="modular_chat.chat_setup.chat_speech_setup.chat_sounder_setup.SpeechSounderActivity" />
         <activity android:name="modular_chat.chat_setup.chat_quick_response_setup.QuickResponseActivity" />
         <activity android:name="modular_chat.chat_setup.chat_syllable_setup.SyllableLibraryActivity" />
         <activity android:name="modular_forum.modular_forum_main.ForumPostingActivity" />
-        <activity android:name="modular_forum.modular_forum_detail.ForumPostDetailActivity"></activity>
+        <activity android:name="modular_forum.modular_forum_detail.ForumPostDetailActivity"/>
     </application>
 
 </manifest>
