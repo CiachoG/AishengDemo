@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    tools:context="login_moudel.LoginActivity">
+    tools:context="module_login.LoginActivity">
     <android.support.v7.widget.Toolbar
         android:id="@+id/register_toolbar"
         android:layout_width="match_parent"
@@ -19,7 +18,7 @@
         android:layout_height="400dp">
         <android.support.v7.widget.CardView
             android:id="@+id/cv_add"
-            app:cardBackgroundColor="#2ea67f"
+            app:cardBackgroundColor="#fff"
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
@@ -38,8 +37,8 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_marginStart="50dp"
-                   android:text="register"
-                   android:textColor="#fff"
+                   android:text="注册"
+                   android:textColor="#FFCC00"
                    android:textSize="16sp"
                    android:textStyle="bold"
                    android:layout_marginLeft="50dp" />
@@ -52,14 +51,14 @@
                    android:paddingLeft="50dp"
                    android:paddingRight="30dp">
                    <android.support.design.widget.TextInputLayout
-                       android:textColorHint="#f0f7f4"
+                       android:textColorHint="#c5c5c5"
                        android:layout_width="match_parent"
                        android:theme="@style/TextLabel"
                        android:layout_height="wrap_content">
                        <EditText
                            android:textSize="13sp"
-                           android:hint="Username"
-                           android:textColor="#f0f7f4"
+                           android:hint="用户名"
+                           android:textColor="#2fa881"
                            android:id="@+id/et_username"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
@@ -80,14 +79,14 @@
                    android:paddingRight="30dp">
                    <android.support.design.widget.TextInputLayout
 
-                       android:textColorHint="#f0f7f4"
+                       android:textColorHint="#c5c5c5"
                        android:theme="@style/TextLabel"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content">
                        <EditText
                            android:textSize="13sp"
-                           android:hint="Password"
-                           android:textColor="#f0f7f4"
+                           android:hint="密码"
+                           android:textColor="#2fa881"
                            android:id="@+id/et_password"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
@@ -108,14 +107,14 @@
                    android:paddingRight="30dp">
                    <android.support.design.widget.TextInputLayout
 
-                       android:textColorHint="#f0f7f4"
+                       android:textColorHint="#c5c5c5"
                        android:theme="@style/TextLabel"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content">
                        <EditText
                            android:textSize="13sp"
-                           android:textColor="#f0f7f4"
-                           android:hint="repeatpassword"
+                           android:textColor="#2fa881"
+                           android:hint="确认密码"
                            android:id="@+id/et_repeatpassword"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
@@ -130,11 +129,11 @@
                    android:layout_marginTop="20dp"
                    android:layout_gravity="center_horizontal"
                    android:id="@+id/bt_go"
-                   android:background="@drawable/bt_shape_2"
+                   android:background="@drawable/bt_shape"
                    android:stateListAnimator="@drawable/state_list_animator_z"
                    android:layout_width="150dp"
                    android:layout_height="50dp"
-                   android:text="next"
+                   android:text="提交"
                    android:textColor="#2fa881"
                    >
                </Button>

@@ -12,23 +12,23 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
 /**
- * Created by Ciacho on 2018/4/22.
+ * Created by Ciacho on 2018/4/26.
  */
 
-public class LoginConnect {
-    private String loginFlag=null;
+public class RegisterConnect {
+    private String responseString=null;
     private Handler handler;
-    public LoginConnect(Handler handler){
+    public RegisterConnect(Handler handler){
         this.handler=handler;
     }
-    public String getLoginFlag() {
-        return loginFlag;
+
+    public String getResponseString() {
+        return responseString;
     }
 
-    public void setLoginFlag(String loginFlag) {
-        this.loginFlag = loginFlag;
+    public void setResponseString(String responseString) {
+        this.responseString = responseString;
     }
 
     public void SendByHttpClient(final String id, final String pw){
@@ -38,10 +38,13 @@ public class LoginConnect {
                 HttpURLConnection connection=null;
                 BufferedReader reader=null;
                 try {
-                    URL url=new URL(Quantity.SERVER_URL+"Login");
+                    URL url=new URL(Quantity.SERVER_URL+"Regist");
                     connection= (HttpURLConnection) url.openConnection();
+                    connection.setRequestProperty("Accept-Charset", "UTF-8");
+                    connection.setRequestProperty("contentType", "UTF-8");
                     connection.setRequestMethod("POST");
                     DataOutputStream outputStream=new DataOutputStream(connection.getOutputStream());
+                    //outputStream.writeUTF("ID="+id+"&PW="+pw);
                     outputStream.writeBytes("ID="+id+"&PW="+pw);
                     connection.setConnectTimeout(8000);
                     connection.setReadTimeout(8000);
@@ -52,7 +55,7 @@ public class LoginConnect {
                     while ((line=reader.readLine())!=null){
                         response.append(line);
                     }
-                    setLoginFlag(response.toString());
+                    setResponseString(response.toString());
                     System.out.println(response);
                     Message message=handler.obtainMessage();
                     message.what=1;
@@ -67,6 +70,4 @@ public class LoginConnect {
             }
         }).start();
     }
-
-
 }

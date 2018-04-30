@@ -1,4 +1,4 @@
-package personal_moudel.app;
+package module_personal.app;
 
 import android.content.Intent;
 import android.os.Bundle;
