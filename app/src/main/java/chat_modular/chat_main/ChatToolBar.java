@@ -1,4 +1,4 @@
-package modular_chat.chat_main;
+package chat_modular.chat_main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,14 +9,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+
 import com.example.ciacho.aishengdemo.R;
 import com.mylhyl.circledialog.CircleDialog;
 import com.mylhyl.circledialog.callback.ConfigDialog;
 import com.mylhyl.circledialog.params.DialogParams;
 import java.util.Map;
-import modular_chat.chat_setup.chat_quick_response_setup.QuickResponseActivity;
-import modular_chat.chat_setup.chat_speech_setup.SpeechSetupActivity;
-import modular_chat.chat_setup.chat_syllable_setup.SyllableLibraryActivity;
+import chat_modular.chat_setup.chat_quick_response_setup.QuickResponseActivity;
+import chat_modular.chat_setup.chat_speech_setup.SpeechSetupActivity;
+import chat_modular.chat_setup.chat_syllable_setup.SyllableLibraryActivity;
 
 //交流活动的工具栏
 public class ChatToolBar extends LinearLayout {
@@ -28,7 +29,7 @@ public class ChatToolBar extends LinearLayout {
 
         LayoutInflater.from(context).inflate(R.layout.layout_chat_toolbar,this);
         ImageButton btn_optional= (ImageButton)findViewById(R.id.btn_optional);
-        btn_optional.setOnClickListener(new OnClickListener() {
+        btn_optional.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popBottomMenu();
@@ -78,6 +79,10 @@ public class ChatToolBar extends LinearLayout {
                         intent.putExtras(bundle);
                         context.startActivity(intent);
                         break;
+/*                    case 3:
+                        intent=new Intent(context,LetterLibraryActivity.class);
+                        context.startActivity(intent);
+                        break;*/
                 }
             }
         });
