@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_window"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff">
+
+    <View
+        android:layout_width="6dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
+        android:background="?attr/colorAccent" />
+
+    <TextView
+        android:id="@+id/text_postTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:text="尴尬，Xbox One 2与PS4.5太快推出压力重重,尴尬，Xbox One 2" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgView_headport"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_below="@+id/text_postTitle"
+        android:layout_marginStart="12dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_headport_other"
+        tools:ignore="RtlCompat" />
+
+    <TextView
+        android:id="@+id/text_userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgView_headport"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="4dp"
+        android:layout_toEndOf="@+id/imgView_headport"
+        android:textColor="@color/MainThemeColor"
+        android:textSize="14sp"
+        android:text="艾声科技"
+        tools:ignore="RtlCompat" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_userName"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/text_userName"
+        android:paddingBottom="2dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="2dp"
+        android:text="楼主"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"
+        android:background="@drawable/badge"
+        tools:ignore="RtlCompat" />
+
+    <TextView
+        android:id="@+id/text_postTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/text_userName"
+        android:layout_below="@+id/text_userName"
+        android:layout_marginTop="4dp"
+        android:maxLines="1"
+        android:text="发布于：2天前"
+        tools:ignore="RtlCompat" />
+
+    <TextView
+        android:id="@+id/btn_more"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/imgView_headport"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="0dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="&#xf142;"
+        tools:ignore="RtlCompat" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_below="@+id/imgView_headport"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/text_postContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/divider"
+        android:autoLink="web"
+        android:lineSpacingMultiplier="1.4"
+        android:paddingBottom="4dp"
+        android:paddingEnd="12dp"
+        android:paddingStart="12dp"
+        android:paddingTop="8dp"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="16sp"
+        android:text="在点(110,10)处绘制一个宽和高均为50像素的正方形边框 context.strokeRect(110,10,50,50); //在点(30,10)处绘制一个宽和高均为50像素的正方形边框 "
+        tools:ignore="RtlCompat" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_below="@+id/text_postContent"
+        android:background="#eff3f7"
+        android:layout_marginTop="15dp"/>
+</RelativeLayout>

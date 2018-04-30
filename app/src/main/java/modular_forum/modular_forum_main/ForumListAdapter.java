@@ -1,4 +1,4 @@
-package modular_forum;
+package modular_forum.modular_forum_main;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.example.ciacho.aishengdemo.R;
 import java.util.List;
+
+import modular_forum.ForumDataTimeTool;
 
 public class ForumListAdapter extends ArrayAdapter<ForumListRow> {
     private Context context;
@@ -28,10 +30,10 @@ public class ForumListAdapter extends ArrayAdapter<ForumListRow> {
         if(convertView==null){
             rowview= LayoutInflater.from(context).inflate(R.layout.layout_frag_forum_row,null,false);
             vh=new ViewHolder();
-            vh.text_title= (TextView) rowview.findViewById(R.id.text_title);
-            vh.text_userName= (TextView) rowview.findViewById(R.id.text_userName);
-            vh.text_commentNum= (TextView) rowview.findViewById(R.id.text_commentNum);
-            vh.text_postDate= (TextView) rowview.findViewById(R.id.text_postDate);
+            vh.text_title=rowview.findViewById(R.id.text_title);
+            vh.text_userName=rowview.findViewById(R.id.text_userName);
+            vh.text_commentNum=rowview.findViewById(R.id.text_commentNum);
+            vh.text_lastCommDate=rowview.findViewById(R.id.text_lastCommDate);
             rowview.setTag(vh);
         }else{
             rowview=convertView;
@@ -41,11 +43,11 @@ public class ForumListAdapter extends ArrayAdapter<ForumListRow> {
         vh.text_title.setText(dataList.get(position).getPostTitle());
         vh.text_userName.setText(dataList.get(position).getUserName());
         vh.text_commentNum.setText(dataList.get(position).getCommentNum());
-        vh.text_postDate.setText(dataList.get(position).getPostDate());
+        vh.text_lastCommDate.setText(ForumDataTimeTool.timeChangeOver(dataList.get(position).getLastCommDate()));
         return rowview;
     }
 
     class ViewHolder{
-        TextView text_title,text_userName,text_postDate,text_commentNum;
+        TextView text_title,text_userName,text_lastCommDate,text_commentNum;
     }
 }

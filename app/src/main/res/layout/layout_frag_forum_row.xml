@@ -11,7 +11,8 @@
     <TextView
         android:id="@+id/text_title"
         android:text="11"
-        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
+        android:textSize="18sp"
         android:textColor="#000"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -30,7 +31,7 @@
         <TextView
             android:id="@+id/text_userName"
             android:text="111"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -55,7 +56,7 @@
             android:layout_height="25dp" />
 
         <TextView
-            android:id="@+id/text_postDate"
+            android:id="@+id/text_lastCommDate"
             android:text="111"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
