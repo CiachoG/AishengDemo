@@ -1,6 +1,7 @@
 package com.example.ciacho.aishengdemo.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -14,6 +15,8 @@ import android.view.View;
 import com.example.ciacho.aishengdemo.R;
 import com.example.ciacho.aishengdemo.adapter.MyPagerAdapter;
 import com.example.ciacho.aishengdemo.entity.TabEntity;
+
+import modular_chat.chat_main.ChatActivity;
 import module_fourm.Fragement.ForumFragment;
 import module_message.Fragment.MessageFragment;
 import module_personal.PersonalFragment;
@@ -67,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.personal:
+                Intent intent =new Intent(MainActivity.this, ChatActivity.class);
+                startActivity(intent);
                 break;
         }
         return true;
@@ -88,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabReselect(int position) {
                 if (position == 0) {
+
                 }
             }
         });

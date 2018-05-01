@@ -28,6 +28,7 @@ public class ChatActivity extends AppCompatActivity {
     private ChatUIListManager chatUIListManager;
     private RealTimeSpeechListener realTimeSpeechListener;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

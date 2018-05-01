@@ -36,8 +36,19 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Toolbar toolbar=(Toolbar)findViewById(R.id.login_toolbar);
+        toolbar.setTitle("登录");
         setSupportActionBar(toolbar);
+
         ActionBar actionBar=getSupportActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
         etUsername=findViewById(R.id.et_username);
         etPassword=findViewById(R.id.et_password);
         handler=new Handler(new Handler.Callback() {
