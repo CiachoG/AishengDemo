@@ -52,7 +52,7 @@ dependencies {
     compile ('com.alibaba.android:vlayout:1.2.8@aar') {
         transitive = true
     }
-    compile 'com.github.pinguo-zhouwei:CustomPopwindow:2.1.1'
+
 
 
 }

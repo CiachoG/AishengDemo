@@ -26,6 +26,7 @@ import com.mylhyl.circledialog.params.DialogParams;
 
 import module_login.LoginActivity;
 import module_personal.app.AboutActivity;
+import module_personal.app.ChangeInfoActivity;
 
 @SuppressLint("ValidFragment")
 public class PersonalFragment extends Fragment {
@@ -108,13 +109,14 @@ public class PersonalFragment extends Fragment {
                         switch(position)
                         {
                             case 0:
+                                Intent intent1=new Intent(getActivity(), ChangeInfoActivity.class);
+                                startActivity(intent1);
                                 break;
                             case 1:
                                 Quantity.LOGIN_FLAG=0;
                                 SharedPreferences.Editor editor = preferences.edit();
                                 editor.clear();
                                 editor.apply();
-                                getActivity().finish();
                                 Intent intent=new Intent(getActivity(), LoginActivity.class);
                                 startActivity(intent);
                                 break;

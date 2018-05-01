@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ciacho.aishengdemo">
-    <user-sdk tools:overrideLibrary="com.github.pinguo-zhouwei:CustomPopwindow:2.1.1"/>
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -34,6 +33,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="module_personal.app.ChangeInfoActivity" android:noHistory="true"
+            android:theme="@style/InfoActivityTheme"></activity>
         <activity android:name="module_personal.app.AboutActivity" />
         <activity android:name="module_personal.app.FunctionActivity" />
         <activity android:name="module_login.LoginActivity" android:noHistory="true"/>
@@ -45,6 +46,7 @@
         <activity android:name="modular_chat.chat_setup.chat_syllable_setup.SyllableLibraryActivity" />
         <activity android:name="modular_forum.modular_forum_main.ForumPostingActivity" />
         <activity android:name="modular_forum.modular_forum_detail.ForumPostDetailActivity"/>
+
     </application>
 
 </manifest>
