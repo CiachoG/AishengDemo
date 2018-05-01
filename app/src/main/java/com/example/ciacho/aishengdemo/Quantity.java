@@ -5,7 +5,7 @@ package com.example.ciacho.aishengdemo;
  */
 
 public class Quantity {
-    public static final String SERVER_URL="http://192.168.1.7:8080/aisheng/";
+    public static final String SERVER_URL="http://47.100.170.83:8080/aisheng/";
     public static int LOGIN_FLAG=0;
 }
 
