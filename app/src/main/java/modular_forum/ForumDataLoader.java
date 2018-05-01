@@ -57,7 +57,7 @@ public class ForumDataLoader {
                     add("PostId",PostId+"").build();
 
             Request request=new Request.Builder().
-                    url(TargetURL+"").post(reqBody).build();
+                    url(TargetURL+"aisheng/GetPost").post(reqBody).build();
 
             Response response=client.newCall(request).execute();
             String jsonResult=response.body().toString();
@@ -81,7 +81,7 @@ public class ForumDataLoader {
                     .add("page",page+"").build();
 
             Request request=new Request.Builder().
-                    url(TargetURL).post(reqBody).build();
+                    url(TargetURL+"GetComment").post(reqBody).build();
 
             Response response=client.newCall(request).execute();
             String jsonResult=response.body().toString();

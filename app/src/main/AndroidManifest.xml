@@ -33,11 +33,12 @@
             </intent-filter>
         </activity>
         <activity android:name="module_personal.app.ChangeInfoActivity" android:noHistory="true"
-            android:theme="@style/InfoActivityTheme"></activity>
+            android:theme="@style/InfoActivityTheme"/>
         <activity android:name="module_personal.app.AboutActivity" />
         <activity android:name="module_personal.app.FunctionActivity" />
         <activity android:name="module_login.LoginActivity" android:noHistory="true"/>
         <activity android:name="module_login.RegisterActivity" />
+
         <activity android:name="modular_chat.chat_main.ChatActivity" />
         <activity android:name="modular_chat.chat_setup.chat_speech_setup.SpeechSetupActivity" />
         <activity android:name="modular_chat.chat_setup.chat_speech_setup.chat_sounder_setup.SpeechSounderActivity" />
