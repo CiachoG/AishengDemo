@@ -3,59 +3,49 @@ package modular_forum.modular_forum_detail;
 import java.util.Date;
 
 public class ForumPostDetailListRow {
-    private String userName="";    //评论或楼主用户名
-    private String contentText=""; //帖子内容或评论文本
-    private Date rowDate;     //发表评论或帖子发帖时间
+    private String CommId;
+    private String UserId;
+    private String UserName;
+    private String CommDate;	//转换格式为 yyyy/MM/dd HH:mm:ss
+    private String CommContent;
 
-    private String postTitle="";   //帖子标题
-    private int commId;          //评论Id
-    private int userId;             //评论的用户Id
+    public String getCommId() {
+        return CommId;
+    }
+
+    public void setCommId(String commId) {
+        CommId = commId;
+    }
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
+    }
 
     public String getUserName() {
-        return userName;
+        return UserName;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        UserName = userName;
     }
 
-    public String getContentText() {
-        return contentText;
+    public String getCommDate() {
+        return CommDate;
     }
 
-    public void setContentText(String contentText) {
-        this.contentText = contentText;
+    public void setCommDate(String commDate) {
+        CommDate = commDate;
     }
 
-    public Date getRowDate() {
-        return rowDate;
+    public String getCommContent() {
+        return CommContent;
     }
 
-    public void setRowDate(Date rowDate) {
-        this.rowDate = rowDate;
-    }
-
-    public String getPostTitle() {
-        return postTitle;
-    }
-
-    public void setPostTitle(String postTitle) {
-        this.postTitle = postTitle;
-    }
-
-    public int getCommId() {
-        return commId;
-    }
-
-    public void setCommId(int commId) {
-        this.commId = commId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setCommContent(String commContent) {
+        CommContent = commContent;
     }
 }

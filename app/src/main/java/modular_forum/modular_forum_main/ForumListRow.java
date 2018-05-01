@@ -3,13 +3,13 @@ package modular_forum.modular_forum_main;
 import java.util.Date;
 
 public class ForumListRow {
-    private long PostId;
+    private String PostId;
     private String PostTitle;
-    private Date LastCommDate;
+    private String LastCommDate;
     private String UserName;
     private String CommentNum;
 
-    public ForumListRow(long postId, String postTitle, Date lastCommDate, String userName, String commentNum) {
+    public ForumListRow(String postId, String postTitle, String lastCommDate, String userName, String commentNum) {
         PostId = postId;
         PostTitle = postTitle;
         LastCommDate = lastCommDate;
@@ -17,11 +17,11 @@ public class ForumListRow {
         CommentNum = commentNum;
     }
 
-    public long getPostId() {
+    public String getPostId() {
         return PostId;
     }
 
-    public void setPostId(long postId) {
+    public void setPostId(String postId) {
         PostId = postId;
     }
 
@@ -33,11 +33,11 @@ public class ForumListRow {
         PostTitle = postTitle;
     }
 
-    public Date getLastCommDate() {
+    public String getLastCommDate() {
         return LastCommDate;
     }
 
-    public void setLastCommDate(Date lastCommDate) {
+    public void setLastCommDate(String lastCommDate) {
         LastCommDate = lastCommDate;
     }
 

@@ -11,14 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.ciacho.aishengdemo.R;
-
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import main_app.MainApplication;
 import modular_dbaccess.SQLDataAccess;
+import modular_forum.ForumDataLoader;
 
 public class ForumPostingActivity extends AppCompatActivity {
     public static final int POST_TITLE_MAXLENGTH=25;
@@ -73,33 +70,27 @@ public class ForumPostingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //发帖
-                try{
-                    posting();
-                }catch (Exception e){
-                    Toast.makeText(ForumPostingActivity.this,
-                            e.toString(),Toast.LENGTH_SHORT).show();
-                }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try{
+                            posting();
+                        }catch (Exception e){
+                            Log.e("提交发帖数据错误:",e.toString());
+                        }
+                    }
+                }).start();
             }
         });
     }
 
-    /*
-    create table T_Forum_Post(
-        Id int primary key,
-        PostTitle varchar(25) NOT NULL,		--帖子标题
-        PostDate Date NOT NULL,				--帖子日期
-        PostContent varchar(250) NOT NULL,	--帖子内容
-        UserId int NOT NULL,					--发帖人用户Id
-        foreign key(UserId) references T_Global_User(Id)
-    );
-     */
     private void posting()throws Exception{
         String PostTitle=edit_postTitle.getText().toString();
         if(PostTitle.length()==0)   throw new Exception("帖子标题不能为空");
         if(PostTitle.length()>POST_TITLE_MAXLENGTH)
             throw new Exception("帖子标题太长了");
 
-        String PostDate=transDate(new Date());
+        String PostDate= ForumDataLoader.DATE_FORMAT.format(new Date());
 
         String PostContent=edit_postContent.getText().toString();
         if(PostContent.length()==0)     throw new Exception("帖子内容不能为空");
@@ -109,37 +100,14 @@ public class ForumPostingActivity extends AppCompatActivity {
         String UserId=app.getUserId();
         if(UserId.equals("-1")) throw new Exception("用户登录异常");
 
-        String sql=String.format("insert into T_Forum_Post values(post_seq.nextval"+
-                        ",'%s',to_date('%s','yyyy/mm/dd HH24:mi:ss'),'%s',%s)",PostTitle,
-                PostDate,PostContent,UserId);
-
-        asyncPosting(sql);
+        String result=ForumDataLoader.sendPostData(PostTitle,PostDate,PostContent,UserId);
+        if(result.equals("OK")){
+            mHandler.sendEmptyMessage(REQ_POSTING_SUCCESS);
+        }else{
+            throw new Exception(result);
+        }
     }
 
-    private void asyncPosting(final String PostingSQL){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    int result=SQLDataAccess.update(PostingSQL);
-                    if(result==1){
-                        mHandler.sendEmptyMessage(REQ_POSTING_SUCCESS);
-                    }else
-                        throw new Exception("数据库受影响行不等于1");
-                } catch (Exception e) {
-                    Log.e("发帖异常信息:",e.toString());
-                }
-            }
-        }).start();
-    }
-
-    //SQL:yyyy/mm/dd hh:mi:ss
-    private SimpleDateFormat dateFormat=null;
-    private String transDate(Date date){
-        if(dateFormat==null)
-            dateFormat=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        return dateFormat.format(date);
-    }
     private void backCancel(){
         setResult(RESULT_CANCELED);
         finish();
