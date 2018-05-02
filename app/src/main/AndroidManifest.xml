@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
@@ -33,11 +32,12 @@
             </intent-filter>
         </activity>
         <activity android:name="module_personal.app.ChangeInfoActivity" android:noHistory="true"
-            android:theme="@style/InfoActivityTheme"></activity>
+            android:theme="@style/InfoActivityTheme"/>
         <activity android:name="module_personal.app.AboutActivity" />
         <activity android:name="module_personal.app.FunctionActivity" />
         <activity android:name="module_login.LoginActivity" android:noHistory="true"/>
         <activity android:name="module_login.RegisterActivity" />
+
         <activity android:name="modular_chat.chat_main.ChatActivity" />
         <activity android:name="modular_chat.chat_setup.chat_speech_setup.SpeechSetupActivity" />
         <activity android:name="modular_chat.chat_setup.chat_speech_setup.chat_sounder_setup.SpeechSounderActivity" />

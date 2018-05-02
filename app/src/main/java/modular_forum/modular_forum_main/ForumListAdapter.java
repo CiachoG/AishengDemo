@@ -8,8 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.example.ciacho.aishengdemo.R;
+
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
+import modular_forum.ForumDataLoader;
 import modular_forum.ForumDataTimeTool;
 
 public class ForumListAdapter extends ArrayAdapter<ForumListRow> {
@@ -43,7 +47,13 @@ public class ForumListAdapter extends ArrayAdapter<ForumListRow> {
         vh.text_title.setText(dataList.get(position).getPostTitle());
         vh.text_userName.setText(dataList.get(position).getUserName());
         vh.text_commentNum.setText(dataList.get(position).getCommentNum());
-        vh.text_lastCommDate.setText(ForumDataTimeTool.timeChangeOver(dataList.get(position).getLastCommDate()));
+
+        try {
+            Date date= ForumDataLoader.DATE_FORMAT.parse(dataList.get(position).getLastCommDate());
+            vh.text_lastCommDate.setText(ForumDataTimeTool.timeChangeOver(date));
+        } catch (ParseException e) {
+            vh.text_lastCommDate.setText(e.getMessage());
+        }
         return rowview;
     }
 

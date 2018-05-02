@@ -56,8 +56,8 @@ public class ForumPostDetailAdapter extends ArrayAdapter<ForumPostDetailListRow>
         }
 
         vh.text_userName.setText(dataList.get(position).getUserName());
-        vh.text_commDate.setText("发表于 "+ ForumDataTimeTool.timeChangeOver(dataList.get(position).getRowDate()));
-        vh.text_commText.setText(dataList.get(position).getContentText());
+        //vh.text_commDate.setText("发表于 "+ ForumDataTimeTool.timeChangeOver(dataList.get(position).getRowDate()));
+        //vh.text_commText.setText(dataList.get(position).getContentText());
         vh.text_commFloor.setText("#"+(position+1));
         return rowview;
     }

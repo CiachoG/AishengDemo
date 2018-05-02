@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import main_app.MainApplication;
-import modular_dbaccess.SQLDataAccess;
 import modular_forum.modular_forum_main.ForumListAdapter;
 import modular_forum.modular_forum_main.ForumListRow;
 import modular_forum.modular_forum_main.ForumPostingActivity;
@@ -148,9 +147,10 @@ public class FragmentForum extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(getContext(), ForumPostDetailActivity.class);
-                long PostId=dataList.get(position).getPostId();
+                String PostId=dataList.get(position).getPostId();
+
                 Bundle bundle=new Bundle();
-                bundle.putLong("POSTID",PostId);
+                bundle.putString("POSTID",PostId);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -216,67 +216,16 @@ public class FragmentForum extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                syncLoadForumDataPage(loadingPage);
+                List<ForumListRow>resultList=ForumDataLoader.loadingForumListDara(loadingPage);
+                hasNewData=false;
+                if(resultList!=null&&resultList.size()>0){
+                    dataList.addAll(resultList);
+                    hasNewData=true;
+
+                    mHandler.sendEmptyMessage(CODE_UPDATELIST);
+                }
             }
         }).start();
-    }
-
-    private void syncLoadForumDataPage(int page){
-        try {
-            String uniqueViewName="T_Temp_Result_"+app.getUserId();
-            String createView_sql="create or replace view "+uniqueViewName+" as " +
-                    "select T_Forum_Post.Id PostId,PostTitle,to_char(T_Temp_LastCommDate.LastCommDate,'yyyy/mm/dd HH24:mi:ss') LastCommDate, UserName,CommentNum " +
-                    "from T_Forum_Post,T_Global_User, " +
-                    "((select T_Forum_Comment.PostId CommPostId,count(*) CommentNum from T_Forum_Comment group by T_Forum_Comment.PostId) " +
-                    "union (select Id PostId,0 CommentNum from T_Forum_Post where Id not in(select PostId from T_Forum_Comment)))   T_Temp_CommNum, " +
-                    "((select T_Forum_Post.Id PostId,max(T_Forum_Comment.CommDate) LastCommDate  from T_Forum_Post,T_Forum_Comment  where T_Forum_Post.Id=T_Forum_Comment.PostId  group by T_Forum_Post.Id) " +
-                    "union (select Id PostId,PostDate LastCommDate from T_Forum_Post where Id not in(select PostId from T_Forum_Comment)))T_Temp_LastCommDate " +
-                    "where T_Forum_Post.UserId=T_Global_User.Id and T_Forum_Post.Id=T_Temp_CommNum.CommPostId and T_Temp_LastCommDate.PostId=T_Forum_Post.Id "+
-                    "order by LastCommDate desc ";
-
-            String query_sql="select * from "+uniqueViewName+" " +
-                    "where  rownum<="+(page*PAGE_LENGTH)+" and PostId not in (select PostId from "+uniqueViewName+" where rownum<= "+((page-1)*PAGE_LENGTH)+ " )";
-
-            String dropView_sql="drop view "+uniqueViewName;
-
-            Method method=FragmentForum.class.getMethod("solveResultSet",ResultSet.class);
-            SQLDataAccess.query(new String[]{createView_sql,query_sql,dropView_sql},
-                    1,method,this);//先查询，后处理
-
-            //处理完成没有出现异常信息
-            mHandler.sendEmptyMessage(CODE_UPDATELIST);
-        } catch (Exception e) {
-            //抛出异常
-            mHandler.sendEmptyMessage(CODE_LOADERROR);
-            Log.e("帖子列表数据读取异常信息:",e.toString());
-        }
-    }
-
-    //处理解析结果集变为列表,返回是否有结果
-    public void solveResultSet(ResultSet rs)throws SQLException{
-        int len=0;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        while(rs.next()){
-            long PostId=rs.getInt(1);
-            String PostTitle=rs.getString(2);
-
-            Date LastCommDate= null;
-            try{
-                String dateStr=rs.getString(3);
-                LastCommDate = sdf.parse(dateStr);
-            }catch(ParseException e) {
-                Log.e("日期转换错误:",e.toString());
-            }
-            String UserName=rs.getString(4);
-            int CommentNum=rs.getInt(5);
-
-            ForumListRow item=new ForumListRow
-                    (PostId,PostTitle,LastCommDate,UserName,String.valueOf(CommentNum));
-
-            dataList.add(item);
-            len++;
-        }
-        hasNewData=(len>=1);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){

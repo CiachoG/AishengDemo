@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import main_app.MainApplication;
-import modular_dbaccess.SQLDataAccess;
+import modular_forum.ForumDataLoader;
 import modular_forum.ForumDataTimeTool;
 
 public class ForumPostDetailActivity extends AppCompatActivity {
@@ -36,7 +36,7 @@ public class ForumPostDetailActivity extends AppCompatActivity {
     private View topView;
 
     private Handler mHandler;
-    private long PostId;
+    private String PostId;
 
     private List<ForumPostDetailListRow> dataList;
     private ForumPostDetailAdapter forumPostDetailAdapter;
@@ -56,7 +56,7 @@ public class ForumPostDetailActivity extends AppCompatActivity {
         setContentView(R.layout.layout_frag_forum_detail);
 
         Bundle bundle=getIntent().getExtras();
-        PostId=bundle.getLong("POSTID");
+        PostId=bundle.getString("POSTID");
 
         isLoading=false;
         nowAllPage=1;
@@ -76,7 +76,6 @@ public class ForumPostDetailActivity extends AppCompatActivity {
                             //成功显示顶层帖子主内容
 
                             nowAllPage++;
-                            isLoading=false;
                         }
                         break;
                     case CODE_UPDATELIST:
@@ -90,6 +89,7 @@ public class ForumPostDetailActivity extends AppCompatActivity {
                         }
                         break;
                     case CODE_LOADERROR:
+                        isLoading=false;
                         list_forumDetailList.setVisibility(View.GONE);
                         text_loading.setVisibility(View.VISIBLE);
                         text_loading.setText("加载出错.....");
@@ -136,11 +136,11 @@ public class ForumPostDetailActivity extends AppCompatActivity {
             }
         });
 
-                    list_forumDetailList.setOnScrollListener(new AbsListView.OnScrollListener() {
-                        @Override
-                        public void onScrollStateChanged(AbsListView absListView, int scrollState) {
-                            if(scrollState== AbsListView.OnScrollListener.SCROLL_STATE_IDLE&&
-                                    lastVisibleIndex==forumPostDetailAdapter.getCount()){
+        list_forumDetailList.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int scrollState) {
+                if(scrollState== AbsListView.OnScrollListener.SCROLL_STATE_IDLE&&
+                        lastVisibleIndex==forumPostDetailAdapter.getCount()){
 
                     progBar_loadingPage.setVisibility(View.VISIBLE);
                     text_noLoadingMore.setVisibility(View.GONE);
@@ -176,49 +176,35 @@ public class ForumPostDetailActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                isLoading=true;
                 boolean result=syncLoadTopData();
                 if(result) {      //顶层内容成功加载
-                    isLoading=true;
                     syncLoadCommentData(nowAllPage);
-                }
+                }else isLoading=false;
             }
         }).start();
     }
+
     //同步加载顶层数据
     public boolean syncLoadTopData(){
-        String query_topSQL="select PostContent,PostTitle,UserName,to_char(PostDate,'yyyy/mm/dd HH24:mi:ss') PostDate  from T_Global_User,T_Forum_Post " +
-                "where T_Global_User.Id=T_Forum_Post.UserId and T_Forum_Post.Id="+PostId;
+        ForumPostDetailTopRow topRow= ForumDataLoader.loadingPostDetailTopData(PostId);
 
-        try {
-            Method method=ForumPostDetailActivity.class.getMethod("solveTopResultSet",ResultSet.class);
-            SQLDataAccess.query(new String[]{query_topSQL},0,method,this);
+        if(topRow!=null){
+            dataList.clear();
+            dataList.add(new ForumPostDetailListRow()); //加入意义的数据行
 
+            loadTopView(topRow);
+            forumPostDetailAdapter=new ForumPostDetailAdapter(this,dataList,topView);
             mHandler.sendEmptyMessage(CODE_LOADTOP);
-        } catch (Exception e) {
+            return true;
+        }else{
             mHandler.sendEmptyMessage(CODE_LOADERROR);
-            Log.e("帖子内容数据读取异常信息:",e.toString());
             return false;
         }
-        return true;
     }
-    //加载帖子主内容界面
-    public void solveTopResultSet(ResultSet rs)throws  Exception{
-        ForumPostDetailListRow item=new ForumPostDetailListRow();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        while(rs.next()){
-            item.setContentText(rs.getString(1));
-            item.setPostTitle(rs.getString(2));
-            item.setUserName(rs.getString(3));
-            item.setRowDate(sdf.parse(rs.getString(4)));
-        }
-        dataList.add(item);
 
-        //成功加载帖子顶层数据
-        loadTopView(item);
-        forumPostDetailAdapter=new ForumPostDetailAdapter(this,dataList,topView);
-    }
     //生成固定的topView
-    private void loadTopView(ForumPostDetailListRow item){
+    private void loadTopView(ForumPostDetailTopRow item){
         TextView text_postTitle,text_userName,text_postTime,text_postContent;
 
         topView= LayoutInflater.from(this).inflate(R.layout.layout_frag_forum_detail_top,null,false);
@@ -229,43 +215,20 @@ public class ForumPostDetailActivity extends AppCompatActivity {
 
         text_postTitle.setText(item.getPostTitle());
         text_userName.setText(item.getUserName());
-        text_postTime.setText(ForumDataTimeTool.timeChangeOver(item.getRowDate()));
-        text_postContent.setText(item.getContentText());
+        text_postTime.setText(item.getPostDate());
+        text_postContent.setText(item.getPostContent());
     }
 
     private void syncLoadCommentData(int page){
-        String query_commSQL="select * from " +
-                " (select T_Temp_Comm.*,rownum RN from " +
-                "  (select T_Forum_Comment.Id CommId,T_Global_User.Id UserId,T_Global_User.UserName,to_char(CommDate,'yyyy/mm/dd HH24:mi:ss') CommDate,CommText from T_Global_User,T_Forum_Comment " +
-                " where T_Forum_Comment.PostId="+PostId+" and T_Global_User.Id=T_Forum_Comment.UserId order by CommDate asc ) T_Temp_Comm " +
-                " where rownum<="+(page*PAGE_SIZE)+" ) " +
-                "where RN>="+((page-1)*PAGE_SIZE+1);
+        List<ForumPostDetailListRow>resultList=ForumDataLoader.
+                loadingPostDetailCommData(PostId,page);
 
-        try{
-            Method method=ForumPostDetailActivity.class.getMethod("solveCommResultSet",ResultSet.class);
-            SQLDataAccess.query(new String[]{query_commSQL},0,method,this);
-
+        if(resultList!=null){
+            hasNewData=(resultList.size()>0);
             mHandler.sendEmptyMessage(CODE_UPDATELIST);
-        }catch (Exception e){
+        }else{
             mHandler.sendEmptyMessage(CODE_LOADERROR);
-            Log.e("帖子评论数据读取异常信息:",e.toString());
         }
-    }
-
-    public void solveCommResultSet(ResultSet rs)throws  Exception{
-        int len=0;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        while(rs.next()){
-            ForumPostDetailListRow item=new ForumPostDetailListRow();
-            item.setCommId(rs.getInt(1));
-            item.setUserId(rs.getInt(2));
-            item.setUserName(rs.getString(3));
-            item.setRowDate(sdf.parse(rs.getString(4)));
-            item.setContentText(rs.getString(5));
-            dataList.add(item);
-            len++;
-        }
-        hasNewData=len>0;
     }
 
     private void comment(){
@@ -280,25 +243,18 @@ public class ForumPostDetailActivity extends AppCompatActivity {
             public void run() {
                 String CommText=edit_commText.getText().toString();
                 String UserId=((MainApplication)getApplication()).getUserId();
-                SimpleDateFormat sdf=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
-                String updateSQL="insert into T_Forum_Comment values(comment_seq.nextval,'"+
-                        CommText+"',to_date('"+sdf.format(new Date())+"','yyyy/mm/dd hh24:mi:ss'),"+
-                        UserId+","+PostId+",-1) ";
+                String result=ForumDataLoader.sendCommentData
+                        (CommText,ForumDataLoader.DATE_FORMAT.format(new Date()),UserId,PostId);
 
-                try {
-                    SQLDataAccess.update(updateSQL);
-
+                if(result.equals("OK")){
                     nowAllPage=1;
                     isLoading=true;
                     for(int i=dataList.size()-1;i>=1;--i)
                         dataList.remove(i);
 
                     syncLoadCommentData(nowAllPage);
-
                     mHandler.sendEmptyMessage(CODE_SEND_COMMENT);
-                } catch (Exception e) {
-                    Log.e("发表评论行为错误:",e.toString());
                 }
             }
         }).start();
