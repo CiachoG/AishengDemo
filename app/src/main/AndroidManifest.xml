@@ -26,8 +26,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.ciacho.aishengdemo.app.MainActivity"
-            android:noHistory="true">
+        <activity android:name="com.example.ciacho.aishengdemo.app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -46,7 +45,7 @@
         <activity android:name="modular_chat.chat_setup.chat_syllable_setup.SyllableLibraryActivity" />
         <activity android:name="modular_forum.modular_forum_main.ForumPostingActivity" />
         <activity android:name="modular_forum.modular_forum_detail.ForumPostDetailActivity"/>
-
+        <activity android:name="module_shop.app.GoodDeatail" android:theme="@style/InfoActivityTheme"></activity>
     </application>
 
 </manifest>
