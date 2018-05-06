@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <modular_chat.chat_main.ChatToolBar
         android:id="@+id/toolbar_chatMain"
         android:layout_alignParentTop="true"

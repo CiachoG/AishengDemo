@@ -10,13 +10,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
-import com.bumptech.glide.Glide;
-import com.example.ciacho.aishengdemo.Quantity;
 import com.example.ciacho.aishengdemo.R;
-import com.example.ciacho.aishengdemo.bean.Goods;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**

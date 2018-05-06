@@ -2,6 +2,7 @@ package com.example.ciacho.aishengdemo.app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.multidex.MultiDex;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -25,6 +26,9 @@ import com.example.ciacho.aishengdemo.utils.ViewFindUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+
+
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < mTitles.length; i++) {
             mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
+        LitePal.initialize(this);
         mDecorView = getWindow().getDecorView();
         mViewPager = ViewFindUtils.find(mDecorView, R.id.vp_2);
         mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(),mFragments,mTitles));
@@ -116,5 +121,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mViewPager.setCurrentItem(1);
+    }
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 }

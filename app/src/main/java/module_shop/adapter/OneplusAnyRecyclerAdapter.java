@@ -1,6 +1,7 @@
 package module_shop.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,9 @@ import com.alibaba.android.vlayout.LayoutHelper;
 import com.bumptech.glide.Glide;
 import com.example.ciacho.aishengdemo.Quantity;
 import com.example.ciacho.aishengdemo.R;
-import com.example.ciacho.aishengdemo.bean.Goods;
+
+import module_shop.app.GoodDeatail;
+import module_shop.entity.Goods;
 
 import java.util.List;
 
@@ -21,13 +24,13 @@ import java.util.List;
  * Created by Ciacho on 2018/4/30.
  */
 
-public class OnplusAnyRecyclerAdapter extends DelegateAdapter.Adapter{
+public class OneplusAnyRecyclerAdapter extends DelegateAdapter.Adapter{
     public Context context;
     private LayoutHelper helper;
     private LayoutInflater inflater;
     List<Goods> goodsArrayList;
 
-    public OnplusAnyRecyclerAdapter(Context context, LayoutHelper helper, List<Goods> goodsArrayList){
+    public OneplusAnyRecyclerAdapter(Context context, LayoutHelper helper, List<Goods> goodsArrayList){
         this.inflater = LayoutInflater.from(context);
         this.helper = helper;
         this.context=context;
@@ -49,6 +52,13 @@ public class OnplusAnyRecyclerAdapter extends DelegateAdapter.Adapter{
         MyViewHolder myViewHolder=(MyViewHolder)holder;
         myViewHolder.name.setText(goodsArrayList.get(position+2).getGoods_name());
         Glide.with(context).load(Quantity.SERVER_URL+goodsArrayList.get(position+2).getGoods_image()).into(myViewHolder.imageView);
+        myViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, GoodDeatail.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

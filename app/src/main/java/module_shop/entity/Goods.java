@@ -1,10 +1,23 @@
-package com.example.ciacho.aishengdemo.bean;
+package module_shop.entity;
 
-public class Goods {
+import org.litepal.crud.DataSupport;
+
+public class Goods extends DataSupport {
 	private String goods_id;
 	private String goods_name;
 	private String goods_image;
 	private int goods_price;
+	private String goods_ditail;
+
+
+	public String getGoods_ditail() {
+		return goods_ditail;
+	}
+
+	public void setGoods_ditail(String goods_ditail) {
+		this.goods_ditail = goods_ditail;
+	}
+
 	public String getGoods_id() {
 		return goods_id;
 	}
