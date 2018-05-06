@@ -4,7 +4,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -15,21 +14,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.ciacho.aishengdemo.R;
-import java.lang.reflect.Method;
-import java.sql.ResultSet;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import main_app.MainApplication;
-import modular_dbaccess.SQLDataAccess;
 import modular_forum.ForumDataLoader;
-import modular_forum.ForumDataTimeTool;
 
 public class ForumPostDetailActivity extends AppCompatActivity {
-    private static final int CODE_UPDATELIST=0,CODE_LOADERROR=1,CODE_LOADTOP=2,CODE_SEND_COMMENT=3;
-    private static final int PAGE_SIZE=10;
+    private static final int CODE_UPDATELIST=0,CODE_LOADERROR=1,CODE_LOADTOP=2,
+            CODE_COMMENT_SUCCESS=3,CODE_COMMENT_ERROR=4;
 
     private ImageButton btn_back;
     private TextView text_loading;
@@ -60,7 +53,7 @@ public class ForumPostDetailActivity extends AppCompatActivity {
         PostId=bundle.getString("POSTID");
 
         isLoading=false;
-        nowAllPage=1;
+        nowAllPage=0;
         dataList=new ArrayList<>();
         forumPostDetailAdapter=null;
         mHandler=new Handler(new Handler.Callback() {
@@ -75,19 +68,17 @@ public class ForumPostDetailActivity extends AppCompatActivity {
                         if(forumPostDetailAdapter!=null){
                             list_forumDetailList.setAdapter(forumPostDetailAdapter);
                             //成功显示顶层帖子主内容
-
-                            nowAllPage++;
                         }
                         break;
                     case CODE_UPDATELIST:
                         isLoading=false;
                         if(hasNewData){
                             nowAllPage++;
-                            forumPostDetailAdapter.notifyDataSetChanged();
                         }else{
                             progBar_loadingPage.setVisibility(View.GONE);
                             text_noLoadingMore.setVisibility(View.VISIBLE);
                         }
+                        forumPostDetailAdapter.notifyDataSetChanged();
                         break;
                     case CODE_LOADERROR:
                         isLoading=false;
@@ -95,10 +86,17 @@ public class ForumPostDetailActivity extends AppCompatActivity {
                         text_loading.setVisibility(View.VISIBLE);
                         text_loading.setText("加载出错.....");
                         break;
-                    case CODE_SEND_COMMENT:
+                    case CODE_COMMENT_SUCCESS:
+                        isLoading=false;
                         Toast.makeText(ForumPostDetailActivity.this,"评论成功",Toast.LENGTH_SHORT).show();
                         edit_commText.setText("");
+                        btn_commSend.setClickable(true);
                         list_forumDetailList.requestFocus();
+                        break;
+                    case CODE_COMMENT_ERROR:
+                        isLoading=false;
+                        btn_commSend.setClickable(true);
+                        Toast.makeText(ForumPostDetailActivity.this,"评论失败",Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return false;
@@ -226,6 +224,9 @@ public class ForumPostDetailActivity extends AppCompatActivity {
 
         if(resultList!=null){
             hasNewData=(resultList.size()>0);
+            if(resultList.size()>0){
+                dataList.addAll(resultList);
+            }
             mHandler.sendEmptyMessage(CODE_UPDATELIST);
         }else{
             mHandler.sendEmptyMessage(CODE_LOADERROR);
@@ -239,23 +240,25 @@ public class ForumPostDetailActivity extends AppCompatActivity {
             return;
         }
 
+        btn_commSend.setClickable(false);
         new Thread(new Runnable() {
             @Override
             public void run() {
                 String CommText=edit_commText.getText().toString();
                 String UserId=((MainApplication)getApplication()).getUserId();
-
                 String result=ForumDataLoader.sendCommentData
                         (CommText,ForumDataLoader.DATE_FORMAT.format(new Date()),UserId,PostId);
 
-                if(result.equals("OK")){
-                    nowAllPage=1;
+                if(result.equals("true")){
+                    nowAllPage=0;
                     isLoading=true;
                     for(int i=dataList.size()-1;i>=1;--i)
                         dataList.remove(i);
 
                     syncLoadCommentData(nowAllPage);
-                    mHandler.sendEmptyMessage(CODE_SEND_COMMENT);
+                    mHandler.sendEmptyMessage(CODE_COMMENT_SUCCESS);
+                }else{
+                    mHandler.sendEmptyMessage(CODE_COMMENT_ERROR);
                 }
             }
         }).start();

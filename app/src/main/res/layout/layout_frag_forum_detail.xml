@@ -7,31 +7,28 @@
     <RelativeLayout
         android:id="@+id/layout_toolbar"
         android:background="@color/MainThemeColor"
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
         <ImageButton
             android:id="@+id/btn_back"
+            android:gravity="center_vertical"
             android:src="@drawable/toolbar_back_btn_selector"
             android:scaleType="centerInside"
             android:background="@color/TransparentColor"
-            android:layout_marginLeft="10dp"
             android:layout_alignParentLeft="true"
-
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:layout_width="45dp"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:layout_width="50dp"
             android:layout_height="50dp" />
-
         <TextView
-            android:text="帖子详情"
-            android:textColor="#fff"
+            android:text="帖子详情页"
+            android:textColor="@android:color/black"
             android:textSize="20sp"
             android:layout_centerInParent="true"
+            android:gravity="center_vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
+            android:layout_height="match_parent" />
     </RelativeLayout>
 
     <ListView

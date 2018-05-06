@@ -19,7 +19,7 @@ import okhttp3.Response;
 
 public class ForumDataLoader {
     private static final String TargetURL="http://47.100.170.83:8080/";
-    public static final SimpleDateFormat DATE_FORMAT=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    public static final SimpleDateFormat DATE_FORMAT=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     //加载论坛界面第page页的帖子数据
     public static List<ForumListRow> loadingForumListDara(int page){
@@ -35,7 +35,11 @@ public class ForumDataLoader {
                     url(TargetURL+"aisheng/GetPost").post(reqBody).build();
 
             Response response=client.newCall(request).execute();
-            String jsonResult=response.body().toString();
+            String jsonResult=response.body().string();
+            jsonResult=new String(jsonResult.getBytes("UTF-8"));
+
+            if(jsonResult.equals("false"))
+                throw new Exception("请求帖子异常");
 
             Gson gson=new Gson();
             dataList=gson.fromJson(jsonResult,new TypeToken<List<ForumListRow>>(){}.getType());
@@ -60,7 +64,8 @@ public class ForumDataLoader {
                     url(TargetURL+"aisheng/GetPost").post(reqBody).build();
 
             Response response=client.newCall(request).execute();
-            String jsonResult=response.body().toString();
+            String jsonResult=response.body().string();
+            jsonResult=new String(jsonResult.getBytes("UTF-8"));
 
             Gson gson=new Gson();
             topItem=gson.fromJson(jsonResult,new TypeToken<ForumPostDetailTopRow>(){}.getType());
@@ -72,56 +77,28 @@ public class ForumDataLoader {
 
     //加载帖子内的评论数据
     public static List<ForumPostDetailListRow> loadingPostDetailCommData(String PostId,int page){
-        List<ForumPostDetailListRow>dataList=null;
+        List<ForumPostDetailListRow>dataList=new ArrayList<>();
         try{
             OkHttpClient client=new OkHttpClient();
-
             RequestBody reqBody=new FormBody.Builder().
                     add("PostId",PostId+"")
                     .add("page",page+"").build();
 
             Request request=new Request.Builder().
-                    url(TargetURL+"GetComment").post(reqBody).build();
+                    url(TargetURL+"aisheng/GetComment").post(reqBody).build();
 
             Response response=client.newCall(request).execute();
-            String jsonResult=response.body().toString();
+            String jsonResult=response.body().string();
+            jsonResult=new String(jsonResult.getBytes("UTF-8"));
 
-            Gson gson=new Gson();
-            dataList=gson.fromJson(jsonResult,new TypeToken<List<ForumPostDetailListRow>>(){}.getType());
+            if(!jsonResult.equals("[]")){
+                Gson gson=new Gson();
+                dataList=gson.fromJson(jsonResult,new TypeToken<List<ForumPostDetailListRow>>(){}.getType());
+            }
         }catch (Exception e){
             Log.e("加载帖子评论内容数据出错:",e.toString());
         }
         return dataList;
-    }
-
-    //提交评论数据
-    public static String sendCommentData(String CommContent,String CommDate,String UserId, String PostId){
-        String result="";
-        try{
-            OkHttpClient client=new OkHttpClient();
-
-            RequestBody reqBody=new FormBody.Builder().
-                    add("CommContent",CommContent+"").
-                    add("CommDate",CommDate+"").
-                    add("UserId",UserId+"").
-                    add("PostId",PostId+"").
-                    build();
-
-            Request request=new Request.Builder().
-                    url(TargetURL).post(reqBody).build();
-
-            Response response=client.newCall(request).execute();
-            String jsonResult=response.body().toString();
-
-            JSONArray array=new JSONArray(jsonResult);
-            for(int i=0;i<array.length();++i){
-                JSONObject obj=array.getJSONObject(i);
-                result=obj.getString("Msg");
-            }
-        }catch (Exception e){
-            Log.e("加载帖子顶层内容数据出错:",e.toString());
-        }
-        return result;
     }
 
     //发帖
@@ -129,6 +106,11 @@ public class ForumDataLoader {
         String result="";
         try{
             OkHttpClient client=new OkHttpClient();
+
+            PostTitle=new String(PostTitle.getBytes(),"UTF-8");
+            PostDate=new String(PostDate.getBytes(),"UTF-8");
+            PostContent=new String(PostContent.getBytes(),"UTF-8");
+            UserId=new String(UserId.getBytes(),"UTF-8");
 
             RequestBody reqBody=new FormBody.Builder().
                     add("PostTitle",PostTitle+"").
@@ -138,18 +120,44 @@ public class ForumDataLoader {
                     build();
 
             Request request=new Request.Builder().
-                    url(TargetURL).post(reqBody).build();
+                    url(TargetURL+"aisheng/InsertPost").post(reqBody).build();
 
             Response response=client.newCall(request).execute();
-            String jsonResult=response.body().toString();
+            result=response.body().string();
 
-            JSONArray array=new JSONArray(jsonResult);
-            for(int i=0;i<array.length();++i){
-                JSONObject obj=array.getJSONObject(i);
-                result=obj.getString("Msg");
-            }
+            result=new String(result.getBytes("UTF-8"));
         }catch (Exception e){
-            Log.e("加载帖子顶层内容数据出错:",e.toString());
+            Log.e("发帖数据解析错误:",e.toString());
+        }
+        return result;
+    }
+
+    //提交评论数据
+    public static String sendCommentData(String CommContent,String CommDate,String UserId, String PostId){
+        String result="";
+        try{
+            OkHttpClient client=new OkHttpClient();
+
+            CommContent=new String(CommContent.getBytes(),"UTF-8");
+            CommDate=new String(CommDate.getBytes(),"UTF-8");
+            UserId=new String(UserId.getBytes(),"UTF-8");
+            PostId=new String(PostId.getBytes(),"UTF-8");
+
+            RequestBody reqBody=new FormBody.Builder().
+                    add("CommContent",CommContent+"").
+                    add("CommDate",CommDate+"").
+                    add("UserId",UserId+"").
+                    add("PostId",PostId+"").
+                    build();
+
+            Request request=new Request.Builder().
+                    url(TargetURL+"aisheng/InsertComment").post(reqBody).build();
+
+            Response response=client.newCall(request).execute();
+            result=response.body().string();
+            result=new String(result.getBytes("UTF-8"));
+        }catch (Exception e){
+            Log.e("发表评论出错:",e.toString());
         }
         return result;
     }

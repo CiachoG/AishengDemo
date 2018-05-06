@@ -9,9 +9,8 @@ public class MainApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        UserId="2";
+        UserId="123456";
         UserName="15211160230";
-
     }
 
     public String getUserId() {

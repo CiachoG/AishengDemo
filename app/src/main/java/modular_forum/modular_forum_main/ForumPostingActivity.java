@@ -10,11 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.example.ciacho.aishengdemo.R;
 import java.util.Date;
 import main_app.MainApplication;
-import modular_dbaccess.SQLDataAccess;
 import modular_forum.ForumDataLoader;
 
 public class ForumPostingActivity extends AppCompatActivity {
@@ -91,7 +89,6 @@ public class ForumPostingActivity extends AppCompatActivity {
             throw new Exception("帖子标题太长了");
 
         String PostDate= ForumDataLoader.DATE_FORMAT.format(new Date());
-
         String PostContent=edit_postContent.getText().toString();
         if(PostContent.length()==0)     throw new Exception("帖子内容不能为空");
         if(PostContent.length()>POST_CONTENT_MAXLENGTH)
@@ -101,7 +98,7 @@ public class ForumPostingActivity extends AppCompatActivity {
         if(UserId.equals("-1")) throw new Exception("用户登录异常");
 
         String result=ForumDataLoader.sendPostData(PostTitle,PostDate,PostContent,UserId);
-        if(result.equals("OK")){
+        if(result.equals("true")){
             mHandler.sendEmptyMessage(REQ_POSTING_SUCCESS);
         }else{
             throw new Exception(result);
@@ -112,6 +109,7 @@ public class ForumPostingActivity extends AppCompatActivity {
         setResult(RESULT_CANCELED);
         finish();
     }
+
     @Override
     public void onBackPressed() {
         backCancel();

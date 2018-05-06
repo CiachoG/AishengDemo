@@ -1,40 +1,40 @@
 package modular_forum.modular_forum_detail;
 
 public class ForumPostDetailTopRow {
-    private String PostContent;
-    private String PostTitle;
-    private String UserName;
-    private String PostDate;
+    private String postContent;
+    private String postTitle;
+    private String userName;
+    private String postDate;
 
     public String getPostContent() {
-        return PostContent;
+        return postContent;
     }
 
     public void setPostContent(String postContent) {
-        PostContent = postContent;
+        this.postContent = postContent;
     }
 
     public String getPostTitle() {
-        return PostTitle;
+        return postTitle;
     }
 
     public void setPostTitle(String postTitle) {
-        PostTitle = postTitle;
+        this.postTitle = postTitle;
     }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
     }
 
     public String getPostDate() {
-        return PostDate;
+        return postDate;
     }
 
     public void setPostDate(String postDate) {
-        PostDate = postDate;
+        this.postDate = postDate;
     }
 }

@@ -9,8 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.example.ciacho.aishengdemo.R;
+import java.text.ParseException;
 import java.util.List;
-
+import modular_forum.ForumDataLoader;
 import modular_forum.ForumDataTimeTool;
 
 public class ForumPostDetailAdapter extends ArrayAdapter<ForumPostDetailListRow> {
@@ -56,8 +57,12 @@ public class ForumPostDetailAdapter extends ArrayAdapter<ForumPostDetailListRow>
         }
 
         vh.text_userName.setText(dataList.get(position).getUserName());
-        vh.text_commDate.setText("发表于 "+ ForumDataTimeTool.timeChangeOver(dataList.get(position).getRowDate()));
-        vh.text_commText.setText(dataList.get(position).getContentText());
+        try {
+            vh.text_commDate.setText("发表于 "+ ForumDataTimeTool.timeChangeOver(ForumDataLoader.DATE_FORMAT.parse(dataList.get(position).getCommDate())));
+        } catch (ParseException e) {
+            vh.text_commDate.setText(e.toString());
+        }
+        vh.text_commText.setText(dataList.get(position).getCommText());
         vh.text_commFloor.setText("#"+(position+1));
         return rowview;
     }

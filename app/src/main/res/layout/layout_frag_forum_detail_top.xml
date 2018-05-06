@@ -40,7 +40,7 @@
         android:layout_marginStart="6dp"
         android:layout_marginTop="4dp"
         android:layout_toEndOf="@+id/imgView_headport"
-        android:textColor="@color/MainThemeColor"
+        android:textColor="@android:color/black"
         android:textSize="14sp"
         android:text="艾声科技"
         tools:ignore="RtlCompat" />

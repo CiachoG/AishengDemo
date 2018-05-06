@@ -1,59 +1,49 @@
 package modular_forum.modular_forum_main;
 
-import java.util.Date;
-
 public class ForumListRow {
-    private String PostId;
-    private String PostTitle;
-    private String LastCommDate;
-    private String UserName;
-    private String CommentNum;
-
-    public ForumListRow(String postId, String postTitle, String lastCommDate, String userName, String commentNum) {
-        PostId = postId;
-        PostTitle = postTitle;
-        LastCommDate = lastCommDate;
-        UserName = userName;
-        CommentNum = commentNum;
-    }
+    private String postId;
+    private String postTitle;
+    private String lastCommDate;
+    private String userName;
+    private String commentNum;
 
     public String getPostId() {
-        return PostId;
+        return postId;
     }
 
     public void setPostId(String postId) {
-        PostId = postId;
+        this.postId = postId;
     }
 
     public String getPostTitle() {
-        return PostTitle;
+        return postTitle;
     }
 
     public void setPostTitle(String postTitle) {
-        PostTitle = postTitle;
+        this.postTitle = postTitle;
     }
 
     public String getLastCommDate() {
-        return LastCommDate;
+        return lastCommDate;
     }
 
     public void setLastCommDate(String lastCommDate) {
-        LastCommDate = lastCommDate;
+        this.lastCommDate = lastCommDate;
     }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        this.userName = userName;
     }
 
     public String getCommentNum() {
-        return CommentNum;
+        return commentNum;
     }
 
     public void setCommentNum(String commentNum) {
-        CommentNum = commentNum;
+        this.commentNum = commentNum;
     }
 }

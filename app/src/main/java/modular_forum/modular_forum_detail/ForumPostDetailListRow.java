@@ -1,51 +1,49 @@
 package modular_forum.modular_forum_detail;
 
-import java.util.Date;
-
 public class ForumPostDetailListRow {
-    private String CommId;
-    private String UserId;
-    private String UserName;
-    private String CommDate;	//转换格式为 yyyy/MM/dd HH:mm:ss
-    private String CommContent;
-
-    public String getCommId() {
-        return CommId;
-    }
-
-    public void setCommId(String commId) {
-        CommId = commId;
-    }
-
-    public String getUserId() {
-        return UserId;
-    }
-
-    public void setUserId(String userId) {
-        UserId = userId;
-    }
-
-    public String getUserName() {
-        return UserName;
-    }
-
-    public void setUserName(String userName) {
-        UserName = userName;
-    }
+    private String commDate;	//转换格式为 yyyy/MM/dd HH:mm:ss
+    private int commId;
+    private String commText;
+    private String userName;
+    private String userId;
 
     public String getCommDate() {
-        return CommDate;
+        return commDate;
     }
 
     public void setCommDate(String commDate) {
-        CommDate = commDate;
+        this.commDate = commDate;
     }
 
-    public String getCommContent() {
-        return CommContent;
+    public int getCommId() {
+        return commId;
     }
 
-    public void setCommContent(String commContent) {
-        CommContent = commContent;
+    public void setCommId(int commId) {
+        this.commId = commId;
+    }
+
+    public String getCommText() {
+        return commText;
+    }
+
+    public void setCommText(String commText) {
+        this.commText = commText;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
