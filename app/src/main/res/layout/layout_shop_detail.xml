@@ -3,33 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+
     >
+
     <RelativeLayout
+        android:background="@color/MainThemeColor"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/header_xiangqing"
-        android:background="#ffffff"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/xiangqingye"
-            android:layout_centerInParent="true"
-            android:text="商品详情页"
-            android:textColor="#000"
-            android:textSize="18sp"
-            />
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+        android:id="@+id/header_xiangqing">
+
+        <ImageButton
             android:id="@+id/back_icons"
+            android:gravity="center_vertical"
+            android:src="@drawable/toolbar_back_btn_selector"
+            android:scaleType="centerInside"
+            android:background="@color/TransparentColor"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="8dp"
-            android:background="@drawable/ic_back"
-            />
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:text="商品详情"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
     </RelativeLayout>
+
+
+
+
+
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"

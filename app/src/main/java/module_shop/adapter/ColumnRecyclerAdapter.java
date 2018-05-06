@@ -1,6 +1,7 @@
 package module_shop.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,9 @@ import android.widget.TextView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.example.ciacho.aishengdemo.R;
+
+import module_shop.Dialog.MyDialog;
+import module_shop.app.ApplyActivity;
 
 
 /**
@@ -41,10 +45,27 @@ public class ColumnRecyclerAdapter extends DelegateAdapter.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ColumnRecyclerAdapter.MyViewHolder myViewHolder=(ColumnRecyclerAdapter.MyViewHolder)holder;
         myViewHolder.name.setText(titles[position]);
         myViewHolder.imageView.setImageResource(images[position]);
+        myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (position){
+                    case 0:
+                        break;
+                    case 1:
+                        MyDialog myDialog=new MyDialog(context);
+                        myDialog.show();
+                        break;
+                    case  2:
+                        Intent intent=new Intent(context, ApplyActivity.class);
+                        context.startActivity(intent);
+                        break;
+                }
+            }
+        });
     }
 
     @Override
