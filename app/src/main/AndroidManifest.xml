@@ -27,7 +27,10 @@
         android:theme="@style/AppTheme">
         <activity android:name="com.example.ciacho.aishengdemo.app.MainActivity"
             android:noHistory="true">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="module_personal.app.ChangeInfoActivity" android:noHistory="true"
             android:theme="@style/InfoActivityTheme"/>
@@ -42,12 +45,7 @@
         <activity android:name="modular_chat.chat_setup.chat_syllable_setup.SyllableLibraryActivity" />
         <activity android:name="modular_forum.modular_forum_main.ForumPostingActivity" />
         <activity android:name="modular_forum.modular_forum_detail.ForumPostDetailActivity"/>
-
         <activity android:name="main_app.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 </manifest>
