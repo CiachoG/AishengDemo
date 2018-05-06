@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +49,11 @@ public class FragmentForum extends Fragment {
     private int nowAllPage;    //第nowAllPage等待加载
 
     private MainApplication app;
+
+    public static FragmentForum getInstance() {
+        return new FragmentForum();
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

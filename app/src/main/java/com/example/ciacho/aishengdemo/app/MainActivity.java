@@ -12,13 +12,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.example.ciacho.aishengdemo.R;
 import com.example.ciacho.aishengdemo.adapter.MyPagerAdapter;
 import com.example.ciacho.aishengdemo.entity.TabEntity;
-
 import modular_chat.chat_main.ChatActivity;
-import module_fourm.Fragement.ForumFragment;
+import modular_forum.FragmentForum;
 import module_message.Fragment.MessageFragment;
 import module_personal.PersonalFragment;
 import module_shop.Fragment.ShopFragment;
@@ -65,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initFragement() {
-        mFragments.add(ForumFragment.getInstance());
+        mFragments.add(FragmentForum.getInstance());
         mFragments.add(ShopFragment.getInstance());
         mFragments.add(MessageFragment.getInstance());
         mFragments.add(PersonalFragment.getInstance());
