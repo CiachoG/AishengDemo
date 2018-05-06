@@ -2,10 +2,8 @@ package modular_chat.chat_main;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -30,23 +28,18 @@ public class ChatActivity extends AppCompatActivity {
     private ChatUIListManager chatUIListManager;
     private RealTimeSpeechListener realTimeSpeechListener;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_chat_main);
-//        Toolbar toolbar=(Toolbar)findViewById(R.id.chat_toolbar);
-//        setSupportActionBar(toolbar);
-//        ActionBar actionBar=getSupportActionBar();
-//        actionBar.setHomeButtonEnabled(true);
-//        actionBar.setDisplayHomeAsUpEnabled(true);
+
         iniView();
         iniReadParams();
         iniObject();
     }
 
     private void iniView(){
-        edit_inputRow= (EditText) findViewById(R.id.edit_inputRow);
+        edit_inputRow=findViewById(R.id.edit_inputRow);
         edit_inputRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +59,7 @@ public class ChatActivity extends AppCompatActivity {
                 return true;
             }
         });
-        text_solvedText= (TextView) findViewById(R.id.text_solvedText);
+        text_solvedText=findViewById(R.id.text_solvedText);
     }
 
     //读取本地语音设置的初始化参数

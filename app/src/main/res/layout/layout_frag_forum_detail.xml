@@ -21,6 +21,7 @@
             android:paddingTop="15dp"
             android:layout_width="50dp"
             android:layout_height="50dp" />
+
         <TextView
             android:text="帖子详情页"
             android:textColor="@android:color/black"

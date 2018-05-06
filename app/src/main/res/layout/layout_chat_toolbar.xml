@@ -30,10 +30,9 @@
         android:background="@color/TransparentColor"
         android:layout_marginRight="10dp"
         android:layout_alignParentRight="true"
-
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:layout_width="45dp"
+        android:paddingBottom="13dp"
+        android:paddingTop="13dp"
+        android:layout_width="50dp"
         android:layout_height="50dp" />
 
 </RelativeLayout >

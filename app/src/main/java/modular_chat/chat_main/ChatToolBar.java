@@ -22,16 +22,24 @@ import modular_chat.chat_setup.chat_syllable_setup.SyllableLibraryActivity;
 public class ChatToolBar extends LinearLayout {
     public static final int REQ_GETSETUPDATA=0,REQ_QUICKRESPONSE=1;
     private ChatActivity context;
-    public ChatToolBar(Context context, AttributeSet attrs) {
+    public ChatToolBar(final Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context=(ChatActivity)context;
 
         LayoutInflater.from(context).inflate(R.layout.layout_chat_toolbar,this);
-        ImageButton btn_optional= (ImageButton)findViewById(R.id.btn_optional);
+        ImageButton btn_optional=findViewById(R.id.btn_optional);
         btn_optional.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 popBottomMenu();
+            }
+        });
+
+        ImageButton btn_back=findViewById(R.id.btn_back);
+        btn_back.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ChatActivity) context).finish();
             }
         });
     }
