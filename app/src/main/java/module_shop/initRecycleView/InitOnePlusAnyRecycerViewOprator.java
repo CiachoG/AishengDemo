@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.OnePlusNLayoutHelper;
-import module_shop.entity.Goods;
+import com.example.ciacho.aishengdemo.bean.Goods;
 
 import java.util.List;
 
