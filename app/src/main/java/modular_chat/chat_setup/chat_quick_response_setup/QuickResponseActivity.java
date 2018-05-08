@@ -3,6 +3,7 @@ package modular_chat.chat_setup.chat_quick_response_setup;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.ciacho.aishengdemo.R;
+import com.githang.statusbar.StatusBarCompat;
 import com.mylhyl.circledialog.CircleDialog;
 import com.mylhyl.circledialog.callback.ConfigDialog;
 import com.mylhyl.circledialog.params.DialogParams;
@@ -36,9 +38,14 @@ public class QuickResponseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_quick_response);
 
+        iniStatusBar();
         iniData();
         iniView();
         iniEvent();
+    }
+
+    private void iniStatusBar(){
+        StatusBarCompat.setStatusBarColor(this, Color.WHITE, true);
     }
 
     private void iniData(){     //读取上一个活动的快速应答词条数据

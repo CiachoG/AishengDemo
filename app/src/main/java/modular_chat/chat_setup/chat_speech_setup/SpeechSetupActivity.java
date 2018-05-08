@@ -1,6 +1,7 @@
 package modular_chat.chat_setup.chat_speech_setup;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.ciacho.aishengdemo.R;
+import com.githang.statusbar.StatusBarCompat;
 import com.mylhyl.circledialog.CircleDialog;
 import com.mylhyl.circledialog.callback.ConfigDialog;
 import com.mylhyl.circledialog.params.DialogParams;
@@ -32,9 +34,14 @@ public class SpeechSetupActivity extends AppCompatActivity {
         linear_rows=new LinearLayout[3];
         text_params=new TextView[3];
 
+        iniStatusBar();
         iniMap();
         iniView();
         iniEvent();
+    }
+
+    private void iniStatusBar(){
+        StatusBarCompat.setStatusBarColor(this, Color.WHITE, true);
     }
 
     public static final String KEY_VOICENAME="VoiceName",KEY_SPEED="Speed",

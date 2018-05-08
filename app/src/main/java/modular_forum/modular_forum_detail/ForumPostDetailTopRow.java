@@ -5,6 +5,7 @@ public class ForumPostDetailTopRow {
     private String postTitle;
     private String userName;
     private String postDate;
+    private String userHeaderUrl;
 
     public String getPostContent() {
         return postContent;
@@ -36,5 +37,13 @@ public class ForumPostDetailTopRow {
 
     public void setPostDate(String postDate) {
         this.postDate = postDate;
+    }
+
+    public String getUserHeaderUrl() {
+        return userHeaderUrl;
+    }
+
+    public void setUserHeaderUrl(String userHeaderUrl) {
+        this.userHeaderUrl = userHeaderUrl;
     }
 }

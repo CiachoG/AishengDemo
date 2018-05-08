@@ -1,6 +1,7 @@
 package modular_chat.chat_setup.chat_speech_setup.chat_sounder_setup;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.ciacho.aishengdemo.R;
+import com.githang.statusbar.StatusBarCompat;
 import com.mylhyl.circledialog.CircleDialog;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +31,13 @@ public class SpeechSounderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_speech_sounder);
 
+        iniStatusBar();
         iniView();
         iniList();
+    }
+
+    private void iniStatusBar(){
+        StatusBarCompat.setStatusBarColor(this, Color.WHITE, true);
     }
 
     private void iniView(){

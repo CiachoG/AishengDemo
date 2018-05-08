@@ -1,23 +1,16 @@
 package main_app;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 
 public class MainApplication extends Application {
-    private String UserId,UserName;
-
     @Override
     public void onCreate() {
         super.onCreate();
-
-        UserId="123456";
-        UserName="15211160230";
     }
 
     public String getUserId() {
-        return UserId;
-    }
-
-    public String getUserName() {
-        return UserName;
+        SharedPreferences pref=this.getSharedPreferences("userInfo",MODE_PRIVATE);
+        return pref.getString("current_userInfo","-1");
     }
 }

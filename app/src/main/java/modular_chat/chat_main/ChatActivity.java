@@ -2,6 +2,8 @@ package modular_chat.chat_main;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -11,6 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.ciacho.aishengdemo.R;
+import com.githang.statusbar.StatusBarCompat;
+
 import java.util.Map;
 import modular_chat.chat_main_list.ChatUIListManager;
 import modular_chat.chat_setup.chat_speech_setup.SpeechSetupActivity;
@@ -33,9 +37,14 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_chat_main);
 
+        iniStatusBar();
         iniView();
         iniReadParams();
         iniObject();
+    }
+
+    private void iniStatusBar(){
+        StatusBarCompat.setStatusBarColor(this, Color.WHITE, true);
     }
 
     private void iniView(){

@@ -6,6 +6,7 @@ public class ForumPostDetailListRow {
     private String commText;
     private String userName;
     private String userId;
+    private String userHeaderUrl;
 
     public String getCommDate() {
         return commDate;
@@ -45,5 +46,13 @@ public class ForumPostDetailListRow {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getUserHeaderUrl() {
+        return userHeaderUrl;
+    }
+
+    public void setUserHeaderUrl(String userHeaderUrl) {
+        this.userHeaderUrl = userHeaderUrl;
     }
 }

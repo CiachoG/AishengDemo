@@ -8,9 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.ciacho.aishengdemo.Quantity;
 import com.example.ciacho.aishengdemo.R;
 import java.text.ParseException;
 import java.util.List;
+import de.hdodenhof.circleimageview.CircleImageView;
 import modular_forum.ForumDataLoader;
 import modular_forum.ForumDataTimeTool;
 
@@ -41,6 +45,7 @@ public class ForumPostDetailAdapter extends ArrayAdapter<ForumPostDetailListRow>
             vh.text_commDate=rowview.findViewById(R.id.text_commDate);
             vh.text_commText=rowview.findViewById(R.id.text_commText);
             vh.text_commFloor=rowview.findViewById(R.id.text_commFloor);
+            vh.imgView_headport=rowview.findViewById(R.id.imgView_headport);
             rowview.setTag(vh);
         }else{
             rowview=convertView;
@@ -52,6 +57,7 @@ public class ForumPostDetailAdapter extends ArrayAdapter<ForumPostDetailListRow>
                 vh.text_commDate=rowview.findViewById(R.id.text_commDate);
                 vh.text_commText=rowview.findViewById(R.id.text_commText);
                 vh.text_commFloor=rowview.findViewById(R.id.text_commFloor);
+                vh.imgView_headport=rowview.findViewById(R.id.imgView_headport);
                 rowview.setTag(vh);
             }
         }
@@ -64,10 +70,17 @@ public class ForumPostDetailAdapter extends ArrayAdapter<ForumPostDetailListRow>
         }
         vh.text_commText.setText(dataList.get(position).getCommText());
         vh.text_commFloor.setText("#"+(position+1));
+        Glide.with(context)
+                .load(Quantity.SERVER_URL+dataList.get(position).getUserHeaderUrl())
+                .animate(R.anim.anim_alpha)
+                .error(R.drawable.img_headport_default)     //加载失败后放置的默认图像
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)    //只缓存最终结果图像
+                .into(vh.imgView_headport);
         return rowview;
     }
 
     class ViewHolder{
         TextView text_userName,text_commDate,text_commText,text_commFloor;
+        CircleImageView imgView_headport;
     }
 }

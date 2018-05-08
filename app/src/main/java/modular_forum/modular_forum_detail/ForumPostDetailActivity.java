@@ -1,5 +1,6 @@
 package modular_forum.modular_forum_detail;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -13,10 +14,16 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.ciacho.aishengdemo.Quantity;
 import com.example.ciacho.aishengdemo.R;
+import com.githang.statusbar.StatusBarCompat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import de.hdodenhof.circleimageview.CircleImageView;
 import main_app.MainApplication;
 import modular_forum.ForumDataLoader;
 
@@ -28,6 +35,8 @@ public class ForumPostDetailActivity extends AppCompatActivity {
     private TextView text_loading;
     private ListView list_forumDetailList;
     private View topView;
+    private CircleImageView imgView_headport;
+    private String topImgUrl;
 
     private Handler mHandler;
     private String PostId;
@@ -66,6 +75,7 @@ public class ForumPostDetailActivity extends AppCompatActivity {
                         text_loading.setVisibility(View.GONE);
 
                         if(forumPostDetailAdapter!=null){
+                            loadTopContentImgHeader();
                             list_forumDetailList.setAdapter(forumPostDetailAdapter);
                             //成功显示顶层帖子主内容
                         }
@@ -104,8 +114,13 @@ public class ForumPostDetailActivity extends AppCompatActivity {
         });
 
         asyncLoadDetailData(); //活动创建开始默认加载顶层内容
+        iniStatusBar();
         iniView();
         iniEvent();
+    }
+
+    private void iniStatusBar(){
+        StatusBarCompat.setStatusBarColor(this, Color.WHITE, true);
     }
 
     private void iniView(){
@@ -211,11 +226,22 @@ public class ForumPostDetailActivity extends AppCompatActivity {
         text_userName=topView.findViewById(R.id.text_userName);
         text_postTime=topView.findViewById(R.id.text_postTime);
         text_postContent=topView.findViewById(R.id.text_postContent);
+        imgView_headport=topView.findViewById(R.id.imgView_headport);
 
         text_postTitle.setText(item.getPostTitle());
         text_userName.setText(item.getUserName());
         text_postTime.setText(item.getPostDate());
         text_postContent.setText(item.getPostContent());
+        topImgUrl=item.getUserHeaderUrl();
+    }
+
+    private void loadTopContentImgHeader(){
+        Glide.with(this)
+                .load(Quantity.SERVER_URL+topImgUrl)
+                .animate(R.anim.anim_alpha)
+                .error(R.drawable.img_headport_default)     //加载失败后放置的默认图像
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)    //只缓存最终结果图像
+                .into(imgView_headport);
     }
 
     private void syncLoadCommentData(int page){
@@ -262,5 +288,11 @@ public class ForumPostDetailActivity extends AppCompatActivity {
                 }
             }
         }).start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Glide.get(this).clearMemory();  //清除内存缓存
+        super.onDestroy();
     }
 }

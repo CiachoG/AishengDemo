@@ -2,6 +2,7 @@ package com.example.ciacho.aishengdemo.app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.multidex.MultiDex;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -24,6 +25,7 @@ import com.example.ciacho.aishengdemo.utils.ViewFindUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.githang.statusbar.StatusBarCompat;
 
 
 import org.litepal.LitePal;
@@ -59,7 +61,11 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(),mFragments,mTitles));
         mTabLayout = ViewFindUtils.find(mDecorView, R.id.tl_2);
         initView();
+        iniStatusBar();
+    }
 
+    private void iniStatusBar(){
+        StatusBarCompat.setStatusBarColor(this, Color.WHITE, true);
     }
 
     private void initFragement() {

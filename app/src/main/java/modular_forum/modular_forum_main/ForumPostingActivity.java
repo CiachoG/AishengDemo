@@ -1,5 +1,6 @@
 package modular_forum.modular_forum_main;
 
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import com.example.ciacho.aishengdemo.R;
+import com.githang.statusbar.StatusBarCompat;
+
 import java.util.Date;
 import main_app.MainApplication;
 import modular_forum.ForumDataLoader;
@@ -45,9 +48,15 @@ public class ForumPostingActivity extends AppCompatActivity {
                 return false;
             }
         });
+        iniStatusBar();
         iniView();
         iniEvent();
     }
+
+    private void iniStatusBar(){
+        StatusBarCompat.setStatusBarColor(this, Color.WHITE, true);
+    }
+
 
     private void iniView(){
         btn_back=findViewById(R.id.btn_back);
