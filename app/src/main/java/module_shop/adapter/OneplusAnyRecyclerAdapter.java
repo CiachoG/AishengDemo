@@ -16,7 +16,7 @@ import com.example.ciacho.aishengdemo.Quantity;
 import com.example.ciacho.aishengdemo.R;
 
 import module_shop.app.GoodDeatail;
-import module_shop.entity.Goods;
+import com.example.ciacho.aishengdemo.bean.Goods;
 
 import java.util.List;
 
@@ -48,7 +48,7 @@ public class OneplusAnyRecyclerAdapter extends DelegateAdapter.Adapter{
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         MyViewHolder myViewHolder=(MyViewHolder)holder;
         myViewHolder.name.setText(goodsArrayList.get(position+2).getGoods_name());
         Glide.with(context).load(Quantity.SERVER_URL+goodsArrayList.get(position+2).getGoods_image()).into(myViewHolder.imageView);
@@ -56,6 +56,7 @@ public class OneplusAnyRecyclerAdapter extends DelegateAdapter.Adapter{
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(context, GoodDeatail.class);
+                intent.putExtra("position",position+2);
                 context.startActivity(intent);
             }
         });

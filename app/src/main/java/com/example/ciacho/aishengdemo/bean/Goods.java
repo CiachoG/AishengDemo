@@ -1,4 +1,4 @@
-package module_shop.entity;
+package com.example.ciacho.aishengdemo.bean;
 
 import org.litepal.crud.DataSupport;
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <com.test.sign_calender.DatePicker2
+        android:id="@+id/qiandao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <com.allen.library.SuperButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="签到"
+        android:textColor="@color/white"
+        stv:sCornersRadius="5dp"
+        stv:sSelectorNormalColor="@color/colorAccent"
+        stv:sUseSelector="true" />
+</LinearLayout>

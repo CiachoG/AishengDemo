@@ -10,12 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.ciacho.aishengdemo.Quantity;
 import com.example.ciacho.aishengdemo.R;
 
-import module_shop.entity.Goods;
+import com.example.ciacho.aishengdemo.bean.Goods;
 import com.example.ciacho.aishengdemo.entity.GlideImageLoader;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

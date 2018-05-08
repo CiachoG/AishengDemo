@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:background="@color/MainThemeColor"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:gravity="center_vertical"
+                android:src="@drawable/toolbar_back_btn_selector"
+                android:scaleType="centerInside"
+                android:background="@color/TransparentColor"
+                android:layout_alignParentLeft="true"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+            <TextView
+                android:text="贫困证明资料填写"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@drawable/shape_linear_border"
+            android:layout_margin="15dp"
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="个人姓名:"
+                    android:textColor="#000"
+                    android:textSize="17sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/edit_apply_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="申请地区:"
+                    android:textColor="#000"
+                    android:textSize="17sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/edit_apply_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <View
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"/>
+
+            <TextView
+                android:text="申请原因："
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edit_apply_why"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:enabled="true"
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:minLines="15"
+                android:maxLines="15"
+                android:scrollbars="vertical"
+                android:background="@android:drawable/edit_text"/>
+            <TextView
+                android:text="证明材料上传："
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <com.example.addpicview.AddPicView
+                android:id="@+id/add_pic_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            </com.example.addpicview.AddPicView>
+            <Button
+                android:id="@+id/btn_apply"
+                android:text="提交申请"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+</LinearLayout>
