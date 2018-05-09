@@ -26,10 +26,7 @@ import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.githang.statusbar.StatusBarCompat;
-
-
 import org.litepal.LitePal;
-
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {

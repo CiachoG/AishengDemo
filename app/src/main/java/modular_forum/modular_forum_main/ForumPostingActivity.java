@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.ciacho.aishengdemo.R;
 import com.githang.statusbar.StatusBarCompat;
 
@@ -21,7 +23,7 @@ import modular_forum.ForumDataLoader;
 public class ForumPostingActivity extends AppCompatActivity {
     public static final int POST_TITLE_MAXLENGTH=25;
     public static final int POST_CONTENT_MAXLENGTH=250;
-    public static final int REQ_POSTING_SUCCESS=0;
+    public static final int REQ_POSTING_SUCCESS=0,REQ_POSTING_ERROR=1;
 
     private ImageButton btn_back;
     private EditText edit_postTitle,edit_postContent;
@@ -43,6 +45,11 @@ public class ForumPostingActivity extends AppCompatActivity {
                     case REQ_POSTING_SUCCESS:
                         setResult(RESULT_OK);
                         finish();
+                        break;
+                    case REQ_POSTING_ERROR:
+                        Bundle bundle=message.getData();
+                        Toast.makeText(ForumPostingActivity.this,"发帖失败"+bundle.get("DATA")
+                                ,Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return false;
@@ -83,6 +90,10 @@ public class ForumPostingActivity extends AppCompatActivity {
                         try{
                             posting();
                         }catch (Exception e){
+                            Message msg=mHandler.obtainMessage();
+                            Bundle bundle=msg.getData();
+                            bundle.putString("DATA",e.getMessage());
+                            mHandler.sendMessage(msg);
                             Log.e("提交发帖数据错误:",e.toString());
                         }
                     }

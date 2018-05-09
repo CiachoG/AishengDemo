@@ -22,13 +22,11 @@ import com.test.sign_calender.DPCManager;
 import com.test.sign_calender.DPDecor;
 import com.test.sign_calender.DatePicker;
 import com.test.sign_calender.DatePicker2;
-
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
-
 
 public class MyDialog extends Dialog {
     private Context context;
