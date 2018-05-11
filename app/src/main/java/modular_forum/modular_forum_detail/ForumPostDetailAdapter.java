@@ -73,6 +73,7 @@ public class ForumPostDetailAdapter extends ArrayAdapter<ForumPostDetailListRow>
         Glide.with(context)
                 .load(Quantity.SERVER_URL+dataList.get(position).getUserHeaderUrl())
                 .animate(R.anim.anim_alpha)
+                .placeholder(R.drawable.img_headport_default)
                 .error(R.drawable.img_headport_default)     //加载失败后放置的默认图像
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)    //只缓存最终结果图像
                 .into(vh.imgView_headport);

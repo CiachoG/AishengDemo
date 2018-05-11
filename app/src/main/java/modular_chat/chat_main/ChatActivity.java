@@ -3,7 +3,6 @@ package modular_chat.chat_main;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.ciacho.aishengdemo.R;
 import com.githang.statusbar.StatusBarCompat;
-
 import java.util.Map;
 import modular_chat.chat_main_list.ChatUIListManager;
 import modular_chat.chat_setup.chat_speech_setup.SpeechSetupActivity;
@@ -23,7 +21,7 @@ import modular_chat.chat_voice_listener.RealTimeSpeechListener;
 
 //发声交流的主页面
 public class ChatActivity extends AppCompatActivity {
-    private TextView text_solvedText;
+    private TextView text_solvedText,text_statusText;
     private EditText edit_inputRow;
 
     private Bundle bundle_speechSetup;    //存储语音参数数据
@@ -32,11 +30,13 @@ public class ChatActivity extends AppCompatActivity {
     private ChatUIListManager chatUIListManager;
     private RealTimeSpeechListener realTimeSpeechListener;
 
+    private boolean isTuring;       //图灵机器人是否开启
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_chat_main);
 
+        iniData();
         iniStatusBar();
         iniView();
         iniReadParams();
@@ -45,6 +45,10 @@ public class ChatActivity extends AppCompatActivity {
 
     private void iniStatusBar(){
         StatusBarCompat.setStatusBarColor(this, Color.WHITE, true);
+    }
+
+    private void iniData(){
+        isTuring=false;
     }
 
     private void iniView(){
@@ -69,6 +73,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
         text_solvedText=findViewById(R.id.text_solvedText);
+        text_statusText=findViewById(R.id.text_statusText);
     }
 
     //读取本地语音设置的初始化参数
@@ -148,6 +153,17 @@ public class ChatActivity extends AppCompatActivity {
         this.chatUIListManager.addListSelfRow(str);
     }
 
+    public boolean isTuring() {
+        return isTuring;
+    }
+
+    public void setTuring(boolean turing) {
+        isTuring = turing;
+    }
+
+    public TextView getStatusTextView(){
+        return text_statusText;
+    }
 
     public Bundle getSpeechSetUpBundle(){
         return this.bundle_speechSetup;

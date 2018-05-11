@@ -10,7 +10,6 @@ import modular_chat.chat_tools.chat_speech_tools.SpeechSynthesizeExecutor;
 
 //调度各种输入法的操作
 public class ChatInputMethodManager {
-    public static final String PREFIX="滴滴滴";
 
     //四个音调键和取消、回车键的字符映射
     public static final char[] TONE_CHARS={'q','w','e','r'};
@@ -98,10 +97,20 @@ public class ChatInputMethodManager {
                 text_solvedText.setText(builder.toString());
             }
         });
+        syllableIMTextWatcher.setFinishInputRunnable(new Runnable() {
+            @Override
+            public void run() {
+                confirmInput();
+            }
+        });
     }
 
     public void confirmInput(){     //按下回车键确认输入
         String edit_str=edit_targetText.getText().toString();
+        if(edit_str.length()>0&&edit_str.charAt(edit_str.length()-1)==OK_CHAR){
+            edit_str=edit_str.substring(0,edit_str.length()-1);
+        }
+
         String solved_str=builder_finalSolvedStr.toString();
 
         if(edit_str.length()%2!=0){     //奇数位指令

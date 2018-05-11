@@ -91,6 +91,7 @@ public class ForumPostingActivity extends AppCompatActivity {
                             posting();
                         }catch (Exception e){
                             Message msg=mHandler.obtainMessage();
+                            msg.what=REQ_POSTING_ERROR;
                             Bundle bundle=msg.getData();
                             bundle.putString("DATA",e.getMessage());
                             mHandler.sendMessage(msg);

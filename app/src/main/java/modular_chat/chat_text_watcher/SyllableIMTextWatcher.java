@@ -21,6 +21,7 @@ public class SyllableIMTextWatcher implements TextWatcher {
 
     private Runnable run_solveOneChar=null;      //解析完一个汉字的回调函数
     private Runnable run_delEmptyEdit=null;      //当编辑文本框为空，依然输入删除字符的命令时的回调函数
+    private Runnable run_finishInput=null;
 
     public SyllableIMTextWatcher(ChatActivity context, EditText edit_targetText){
         this.edit_targetText=edit_targetText;
@@ -58,21 +59,28 @@ public class SyllableIMTextWatcher implements TextWatcher {
     }
 
     //对于编辑文本框里所有字符串，即从inputData中解析出一个汉字，并删除相应前缀
-    public String inputTextSolving(String inputData){
-        if(inputData.length()==0)   return "";
+    private String inputTextSolving(String inputData){
+        int strLength=inputData.length();
+
+        if(strLength==0)   return "";
 
         //当目标编辑文本框为空，并按下删除键,则尝试删除已经解析好的汉字列表
-        if(inputData.length()==1&&inputData.charAt(0)==
+        if(strLength==1&&inputData.charAt(0)==
                 ChatInputMethodManager.SPECIAL_CANCEL){
             if(run_delEmptyEdit!=null)  run_delEmptyEdit.run();
             return "";
         }
 
         //刚输入一个删除含义的字符
-        if(inputData.length()>=2&&inputData.charAt(inputData.length()-1)
+        if(strLength>=2&&inputData.charAt(inputData.length()-1)
                 ==ChatInputMethodManager.SPECIAL_CANCEL){
             //将最后两个字符删掉,删除含义的字符和原来的最后一个字符
             return inputData.substring(0,inputData.length()-2);
+        }
+
+        if(inputData.charAt(strLength-1)==ChatInputMethodManager.OK_CHAR){
+            if(run_finishInput!=null)   run_finishInput.run();
+            return "";
         }
 
         int type;
@@ -153,5 +161,9 @@ public class SyllableIMTextWatcher implements TextWatcher {
 
     public void setDeleteEmptyEditRunnable(Runnable runnable){
         this.run_delEmptyEdit=runnable;
+    }
+
+    public void setFinishInputRunnable(Runnable runnable){
+        this.run_finishInput=runnable;
     }
 }
