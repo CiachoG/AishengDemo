@@ -7,8 +7,10 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
+import java.util.Arrays;
+
 //汉字转换类
-public class CNCharTransfor {
+public class CNCharTool {
     private static HanyuPinyinOutputFormat format,formatExtend;
 
     static{
@@ -57,31 +59,40 @@ public class CNCharTransfor {
         return false;
     }
 
+    private static int[][] dp=new int[2][110];
+    //通过编辑距离算法，计算两个字符串的差值
+    public static int getSentenceSpacing(String str1,String str2){
+        if(str1.equals(str2))   return 0;
 
-    public static class CNChar{
-        private String phonetic;
-        private int tone;       //1~4
-        public CNChar(){}
-
-        public CNChar(String phonetic, int tone) {
-            this.phonetic = phonetic;
-            this.tone = tone;
+        StringBuilder sb=new StringBuilder("");
+        for(int i=0;i<str1.length();++i){
+            if(isCNChar(str1.charAt(i)))
+                sb.append(str1.charAt(i));
         }
+        str1=' '+sb.toString();
 
-        public String getPhonetic() {
-            return phonetic;
+        sb.delete(0,sb.length());
+        for(int i=0;i<str2.length();++i){
+            if(isCNChar(str2.charAt(i)))
+                sb.append(str2.charAt(i));
         }
+        str2=' '+sb.toString();
 
-        public void setPhonetic(String phonetic) {
-            this.phonetic = phonetic;
-        }
+        Arrays.fill(dp[0],0);
+        Arrays.fill(dp[1],0);
+        for(int i=1;i<=str2.length()-1;++i)
+            dp[0][i]=i;
 
-        public int getTone() {
-            return tone;
+        for(int i=1;i<=str1.length()-1;++i){
+            for(int j=1;j<=str2.length()-1;++j){
+                if(str1.charAt(i)==str2.charAt(j))
+                    dp[1][j]=dp[0][j-1];
+                else
+                    dp[1][j]=Math.min(dp[0][j]+1,Math.min(dp[1][j-1]+1,dp[0][j-1]+1));
+            }
+            for(int j=0;j<= str2.length()-1;++j)
+                dp[0][j]=dp[1][j];
         }
-
-        public void setTone(int tone) {
-            this.tone = tone;
-        }
+        return dp[1][str2.length()-1];
     }
 }

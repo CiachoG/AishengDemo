@@ -5,7 +5,7 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import modular_chat.chat_text_watcher.SyllableIMTextWatcher;
-import modular_chat.chat_tools.CNCharTransfor;
+import modular_chat.chat_tools.CNCharTool;
 import modular_chat.chat_tools.chat_speech_tools.SpeechSynthesizeExecutor;
 
 //调度各种输入法的操作
@@ -57,14 +57,34 @@ public class ChatInputMethodManager {
 
                 //把新解析的伪字包含进来
                 char ch=syllableIMTextWatcher.getSolvedCNChar();
+                String pinyin=syllableIMTextWatcher.getSolvedCNCharPinyin();
+
                 builder_finalSolvedStr.append(ch);   //加入进最终解析文本
 
-                String[] array=CNCharTransfor.transformationWithTone(ch);
-                if(array==null||array.length==0)  return;
+                String[] arrayTone= CNCharTool.transformationWithTone(ch);
+                if(arrayTone==null||arrayTone.length==0)  return;
 
-                String newSyllStr=array[0];     //对应的带音调的字符串
+                String[] arrayNoneTone= CNCharTool.transformation(ch);
+                if(arrayNoneTone==null||arrayNoneTone.length==0)  return;
+                int index=-1;
+                for(int i=0;i<arrayNoneTone.length;++i){
+                    if(arrayNoneTone[i].equals(pinyin)){
+                        index=i;
+                        break;
+                    }
+                }
+
+                if(index==-1){
+                    Log.e("解析一个汉字拼音有误","多音字拼音与输入的目标拼音无法对应");
+                    index=0;
+                }
+
+                String newSyllStr=arrayTone[index];     //对应的带音调的字符串
+                if(arrayTone.length>1){
+                    newSyllStr="["+newSyllStr+"]";
+                }
+
                 String solvedText=text_solvedText.getText().toString();
-
                 if(solvedText.length()!=0){
                     String str=solvedText+" "+newSyllStr;
                     text_solvedText.setText(str);
@@ -82,9 +102,9 @@ public class ChatInputMethodManager {
 
                 StringBuilder builder=new StringBuilder("");
                 for(int i=0;i<builder_finalSolvedStr.length();++i){
-                    if(CNCharTransfor.isCNChar(builder_finalSolvedStr.charAt(i))){
+                    if(CNCharTool.isCNChar(builder_finalSolvedStr.charAt(i))){
                         //如果为汉字
-                        String[] array=CNCharTransfor.
+                        String[] array= CNCharTool.
                                 transformationWithTone(builder_finalSolvedStr.charAt(i));
 
                         if(array!=null&&array.length>0){
@@ -117,22 +137,10 @@ public class ChatInputMethodManager {
             chatOrderManager.orderSolve(edit_str);
             syllableIMTextWatcher.clearEditContent();
         }else if(solved_str.length()>0){    //确认输出解析后的内容
+            //添加交流的行布局
+            context.addListSelfRow(text_solvedText.getText()+"");
 
             speechSynthExecutor.startSpeechSynthesize(solved_str);
-            StringBuilder builder=new StringBuilder("");
-            for(int i=0;i<builder_finalSolvedStr.length();++i){
-                if(i!=0)    builder.append(" ");
-                char ch=builder_finalSolvedStr.charAt(i);
-                if(CNCharTransfor.isCNChar(ch)){
-                    String[] array=CNCharTransfor.transformationWithTone(ch);
-                    if(array!=null&&array.length>0)
-                        builder.append(array[0]);
-                }else
-                    builder.append(ch);
-            }
-
-            //添加交流的行布局
-            context.addListSelfRow(builder.toString());
 
             //清掉所有解析出来的字符串
             builder_finalSolvedStr.delete(0,builder_finalSolvedStr.length());

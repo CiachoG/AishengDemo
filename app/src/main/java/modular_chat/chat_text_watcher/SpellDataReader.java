@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import jxl.Sheet;
 import jxl.Workbook;
+import modular_chat.chat_tools.AssetSDCardUnpacker;
 
 public class SpellDataReader {
 	public static List<SpellExlRow> list_charRowData;	//拼音加音调对象列表
@@ -33,32 +34,13 @@ public class SpellDataReader {
         SpellData_savePath=context.getFilesDir().getAbsolutePath()+"/SpellDataSet.xls";
 	}
 
-    private void readAssetsResource()throws IOException{
-        File file=new File(SpellData_savePath);
-        if(file.exists()&&file.length()!=0)     //手机缓存中已有，可不用再从资产中读取exl文件
-            return;
-
-        AssetManager assetManager=context.getAssets();
-        InputStream inputStream=assetManager.open("SpellDataSet.xls");
-        FileOutputStream outputStream=new FileOutputStream(new File(SpellData_savePath));
-
-        byte[] buffer = new byte[1024];
-        int byteCount=0;
-        while((byteCount=inputStream.read(buffer))!=-1)
-            outputStream.write(buffer,0,byteCount);
-
-        outputStream.flush();
-        outputStream.close();
-        inputStream.close();
-    }
-
-
 	public void work()throws Exception{
 		if(isAvaliable.get())	return;
 
-        readAssetsResource();
+		AssetSDCardUnpacker.work(context,SpellData_savePath,"SpellDataSet.xls");
+
 		File exlFile=new File(SpellData_savePath);
-		if(exlFile==null||!exlFile.exists()||!exlFile.isFile())
+		if(!exlFile.exists()||!exlFile.isFile())
 			return;
 				
 		try{

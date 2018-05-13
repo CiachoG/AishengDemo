@@ -71,7 +71,7 @@ public class ChatUIListManager {
                 return false;
             }
         });
-        chatTuringRobot=new ChatTuringRobot(mHandler);
+        chatTuringRobot=new ChatTuringRobot(context,mHandler);
     }
 
     public void addListSelfRow(String str) {
@@ -87,7 +87,8 @@ public class ChatUIListManager {
         chatUIListAdapter.notifyDataSetChanged();
         signal_addNewRow = true;
 
-        chatTuringRobot.work(str);
+        if(context.isTuring())
+            chatTuringRobot.work(str);
     }
 
     public void scrollToLastPosition(){

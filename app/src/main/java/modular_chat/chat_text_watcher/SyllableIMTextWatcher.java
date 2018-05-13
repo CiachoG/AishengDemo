@@ -4,6 +4,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +18,7 @@ public class SyllableIMTextWatcher implements TextWatcher {
 
     private EditText edit_targetText;
     private char solvedCNChar;    //最新解析成中文的字符数据
+    private String solvedCNCharPinyin;  //解析的汉字拼音数据
     private SpellDataReader dataReader;
 
     private Runnable run_solveOneChar=null;      //解析完一个汉字的回调函数
@@ -114,9 +116,11 @@ public class SyllableIMTextWatcher implements TextWatcher {
                     }
 
                     solvedCNChar=c;    //解析出一个汉字
+                    solvedCNCharPinyin=list.get(index).getPhonetic();
                     if(run_solveOneChar!=null)  run_solveOneChar.run();
                     solvedCNChar=' ';
                 }else{
+                    Toast.makeText(context,"无效的拼音",Toast.LENGTH_SHORT).show();
                     Log.e("错误:","汉字解析异常");
                 }
                 return inputData.substring(i+1);    //返回解析完后的剩余字符串
@@ -149,6 +153,9 @@ public class SyllableIMTextWatcher implements TextWatcher {
     }
     public char getSolvedCNChar(){
         return this.solvedCNChar;
+    }
+    public String getSolvedCNCharPinyin(){
+        return this.solvedCNCharPinyin;
     }
 
     public Map<Integer,String> getSyllableMapData(){
