@@ -24,9 +24,9 @@ public class ChatOrderManager {
             case TURING_RESPONSE:
                 boolean isTuring=context.isTuring();
                 if(isTuring){   //关闭图灵机器人
-                    context.getStatusTextView().setText("已关闭图灵机器人");
+                    context.getStatusTextView().setText("已关闭半自动应答");
                 }else{      //开启图灵机器人
-                    context.getStatusTextView().setText("已开启图灵机器人");
+                    context.getStatusTextView().setText("已开启半自动应答");
                 }
                 context.setTuring(!isTuring);
                 return;

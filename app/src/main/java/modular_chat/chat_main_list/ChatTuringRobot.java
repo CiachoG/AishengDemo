@@ -92,7 +92,7 @@ public class ChatTuringRobot {
                     for(int i=0;i<turingCustomList.size();++i){
                         int spacing=CNCharTool.getSentenceSpacing(question,
                                 turingCustomList.get(i).getQuestion());
-                        Log.e("222",spacing+"");
+
                         if(spacing<=MAX_SENTENCE_LENGTH){
 
                             Message msg=handler.obtainMessage();
