@@ -50,5 +50,4 @@ public class ChatOrderManager {
                 return true;
         return false;
     }
-
 }
