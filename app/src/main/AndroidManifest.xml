@@ -16,9 +16,9 @@
         tools:replace="android:icon,android:label,android:theme"
         android:name="main_app.MainApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/img_app_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/img_app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.example.ciacho.aishengdemo.app.MainActivity">

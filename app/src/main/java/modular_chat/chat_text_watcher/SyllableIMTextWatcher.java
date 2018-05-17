@@ -48,16 +48,16 @@ public class SyllableIMTextWatcher implements TextWatcher {
     public void afterTextChanged(Editable s) {
         //当用户输入完
         //在该函数内不能处理edit_targetText.setText()操作
-        //try{
-            String result=inputTextSolving(s.toString());
-            edit_targetText.removeTextChangedListener(this);
-            edit_targetText.setText(result);
-            edit_targetText.setSelection(result.length());
-
-            edit_targetText.addTextChangedListener(this);
-        //}catch (Exception e){
-            //Log.e("错误信息：",e.toString());
-        //}
+        String result="";
+        try{
+            result=inputTextSolving(s.toString());
+        }catch (Exception e){
+            Log.e("错误信息：",e.toString());
+        }
+        edit_targetText.removeTextChangedListener(this);
+        edit_targetText.setText(result);
+        edit_targetText.setSelection(result.length());
+        edit_targetText.addTextChangedListener(this);
     }
 
     //对于编辑文本框里所有字符串，即从inputData中解析出一个汉字，并删除相应前缀
